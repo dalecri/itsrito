@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="forest">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,42 +17,14 @@
   font-display: swap;
 }
 
-/* ---------- Themes: pure variable sets ---------- */
-:root, :root[data-theme="forest"] {
+/* ---------- Forest palette ---------- */
+:root {
   --bg: #0b130e; --panel: #111d16; --line: #1f3a2b;
   --ink: #d6f5e3; --dim: #7fa892; --accent: #c4d96a; --on-accent: #0b130e;
   --r-star: #e6eb9a; --r-far: #2b4a37; --r-land: #3f6d4d; --r-tree: #5f9a6b;
   --r-house: #9cc9a8; --r-cat: #c4d96a; --r-door: #c4d96a; --r-water: #4f8f7a;
   --r-glow: #c4d96a; --r-ban: #d6f5e3; --r-shd: #3f6d4d; --r-hot: #f1ffd0;
   --chroma-a: #c4d96a; --chroma-b: #4f8f7a; --glow: #c4d96a33; --glow-blur: 28px;
-  color-scheme: dark;
-}
-:root[data-theme="gameboy"] {
-  /* DMG palette, these four values only */
-  --bg: #0f380f; --panel: #0f380f; --line: #306230;
-  --ink: #9bbc0f; --dim: #8bac0f; --accent: #9bbc0f; --on-accent: #0f380f;
-  --r-star: #9bbc0f; --r-far: #306230; --r-land: #306230; --r-tree: #8bac0f;
-  --r-house: #8bac0f; --r-cat: #9bbc0f; --r-door: #9bbc0f; --r-water: #8bac0f;
-  --r-glow: #9bbc0f; --r-ban: #9bbc0f; --r-shd: #306230; --r-hot: #9bbc0f;
-  --chroma-a: #8bac0f; --chroma-b: #306230; --glow: #306230; --glow-blur: 0px;
-  color-scheme: dark;
-}
-:root[data-theme="meadow"] {
-  --bg: #437d36; --panel: #3a6f2f; --line: #5e9a4c;
-  --ink: #fff8e1; --dim: #dfe9c4; --accent: #d4f582; --on-accent: #23441c;
-  --r-star: #fff8e1; --r-far: #6aa556; --r-land: #8fc173; --r-tree: #c4ea8c;
-  --r-house: #fff8e1; --r-cat: #d4f582; --r-door: #ffe9a8; --r-water: #b8e6d0;
-  --r-glow: #ffe9a8; --r-ban: #fff8e1; --r-shd: #2c5823; --r-hot: #ffffff;
-  --chroma-a: #d4f582; --chroma-b: #b8e6d0; --glow: #fff8e140; --glow-blur: 24px;
-  color-scheme: light;
-}
-:root[data-theme="pines"] {
-  --bg: #071a1c; --panel: #0c2528; --line: #17404a;
-  --ink: #a8f0dc; --dim: #5fa596; --accent: #f2e35c; --on-accent: #071a1c;
-  --r-star: #f2e35c; --r-far: #143a3c; --r-land: #1f5250; --r-tree: #2f7a6a;
-  --r-house: #6fbfae; --r-cat: #a8f0dc; --r-door: #f2e35c; --r-water: #2f7487;
-  --r-glow: #f2e35c; --r-ban: #a8f0dc; --r-shd: #1f5250; --r-hot: #e6fff7;
-  --chroma-a: #a8f0dc; --chroma-b: #2f7487; --glow: #a8f0dc26; --glow-blur: 28px;
   color-scheme: dark;
 }
 
@@ -83,8 +55,18 @@ pre.art {
 .r-glow{color:var(--r-glow)} .r-ban{color:var(--r-ban)} .r-shd{color:var(--r-shd)}
 .hot { color: var(--r-hot); text-shadow: 0 0 8px var(--glow); }
 
+/* ---------- Top-right socials ---------- */
+.socials { position: absolute; top: 14px; right: 16px; display: flex; gap: 8px; z-index: 2; }
+.socials a {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px;
+  color: var(--dim); background: var(--panel); border: 1px solid var(--line);
+  transition: color .2s, border-color .2s, box-shadow .2s;
+}
+.socials a:hover { color: var(--accent); border-color: var(--accent); box-shadow: -2px 0 0 var(--chroma-a), 2px 0 0 var(--chroma-b), 0 0 18px var(--glow); }
+.socials svg { width: 20px; height: 20px; fill: currentColor; }
+
 /* ---------- Hero ---------- */
-.hero { padding: 40px 0 8px; text-align: center; }
+.hero { padding: 72px 0 8px; text-align: center; }
 .eyebrow { color: var(--dim); font-size: 1rem; letter-spacing: .08em; margin-bottom: 6px; }
 .banner-stage { overflow: hidden; display: flex; justify-content: center; }
 #banner { font-size: 14px; font-weight: 700; cursor: default; }
@@ -103,7 +85,7 @@ pre.art {
 }
 
 /* ---------- Theme chips ---------- */
-.themes { padding-top: 32px; text-align: center; }
+.themes { padding-top: 28px; text-align: center; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .chip {
   font: inherit; font-size: .85rem; color: var(--ink); background: var(--panel);
@@ -111,7 +93,6 @@ pre.art {
   cursor: pointer; transition: border-color .2s, transform .2s;
 }
 .chip:hover { border-color: var(--dim); transform: translateY(-1px); }
-.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 .chip.surprise { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 700; }
 .hint { margin-top: 10px; color: var(--dim); font-size: .75rem; }
 .hint kbd { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
@@ -159,7 +140,6 @@ pre.art {
 footer.wrap { padding-top: 48px; padding-bottom: 40px; text-align: center; color: var(--dim); font-size: .8rem; }
 footer pre { font-size: 13px; margin-bottom: 12px; }
 footer p { margin: 2px 0; }
-#readout { opacity: .8; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
@@ -168,6 +148,15 @@ footer p { margin: 2px 0; }
 </style>
 </head>
 <body>
+<nav class="socials" aria-label="Rito elsewhere">
+  <a href="https://www.tiktok.com/@rookietocommander" rel="noopener" aria-label="TikTok: @rookietocommander" title="TikTok">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6Z"/></svg>
+  </a>
+  <a href="https://www.youtube.com/results?search_query=The+Outdoor+Gays" rel="noopener" aria-label="YouTube: The Outdoor Gays" title="YouTube">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9l5.8 3.1-5.8 3.1Z"/></svg>
+  </a>
+</nav>
+
 <main class="wrap">
 
   <header class="hero">
@@ -181,15 +170,8 @@ footer p { margin: 2px 0; }
     <div class="note" id="note" hidden></div>
   </header>
 
-  <section class="themes" aria-labelledby="themesTitle">
-    <h2 id="themesTitle" class="sr-only">Pick a theme</h2>
-    <div class="chips" id="chips">
-      <button class="chip" data-theme-id="forest" aria-pressed="false">Forest</button>
-      <button class="chip" data-theme-id="gameboy" aria-pressed="false">Game Boy</button>
-      <button class="chip" data-theme-id="meadow" aria-pressed="false">Meadow</button>
-      <button class="chip" data-theme-id="pines" aria-pressed="false">Midnight Pines</button>
-      <button class="chip surprise" id="surprise">Surprise me</button>
-    </div>
+  <section class="themes" aria-label="Surprise">
+    <button class="chip surprise" id="surprise">Surprise me</button>
     <p class="hint" aria-hidden="true">press <kbd>S</kbd> for a surprise</p>
   </section>
 
@@ -246,7 +228,6 @@ footer p { margin: 2px 0; }
 <footer class="wrap">
   <pre class="art" aria-hidden="true"><span class="r-tree">/|\ /|\</span>  <span class="r-house">|</span><span class="r-cat">=^.^=</span><span class="r-house">[]</span><span class="r-cat">=^.^=</span><span class="r-house">|</span>  <span class="r-tree">/|\ /|\</span></pre>
   <p>itsrito.com — built with love in the Laurentians.</p>
-  <p id="readout">theme: forest</p>
 </footer>
 
 <script>
@@ -255,12 +236,6 @@ const NOTE = "";
 (() => {
   "use strict";
 
-  const THEMES = [
-    { id: "forest",  name: "forest" },
-    { id: "gameboy", name: "game boy" },
-    { id: "meadow",  name: "meadow" },
-    { id: "pines",   name: "midnight pines" }
-  ];
   const VARIANTS = ["hills", "river", "garden"];
   const FACTS = [
     "Card hunter: always one pack away from the big pull.",
@@ -270,8 +245,6 @@ const NOTE = "";
     "Switch 2 player, couch co-op certified.",
     "Tremblant regular, whatever the season."
   ];
-  const STORE_KEY = "itsrito-theme";
-  const root = document.documentElement;
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduced = mq.matches;
 
@@ -548,29 +521,11 @@ const NOTE = "";
   mq.addEventListener ? mq.addEventListener("change", onMotion) : mq.addListener(onMotion);
   start();
 
-  /* themes */
-  const chips = [...document.querySelectorAll("[data-theme-id]")];
-  const readout = document.getElementById("readout");
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
-  function applyTheme(id, save) {
-    const th = THEMES.find(t => t.id === id) || THEMES[0];
-    root.dataset.theme = th.id;
-    chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.themeId === th.id)));
-    readout.textContent = "theme: " + th.name;
-    metaTheme.setAttribute("content", getComputedStyle(root).getPropertyValue("--bg").trim());
-    if (save) { try { localStorage.setItem(STORE_KEY, th.id); } catch (e) {} }
-  }
-  let saved = null;
-  try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
-  applyTheme(saved || "forest", false);
-  chips.forEach(c => c.addEventListener("click", () => applyTheme(c.dataset.themeId, true)));
-
   function pickOther(list, current) {
     const opts = list.filter(x => x !== current);
     return opts[(Math.random() * opts.length) | 0];
   }
   function surprise() {
-    applyTheme(pickOther(THEMES.map(t => t.id), root.dataset.theme), true);
     loadScene(pickOther(VARIANTS, variant));
     factIdx = pickOther(FACTS.map((_, i) => i), factIdx);
     factEl.textContent = FACTS[factIdx];
