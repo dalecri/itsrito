@@ -143,12 +143,18 @@ html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 
 /* ---------- Links ---------- */
 .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.links a {
+.links a, .links .row {
   display: flex; align-items: center; gap: 14px; text-decoration: none;
   background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
   padding: 14px 16px; min-height: 56px; transition: border-color .2s, transform .2s;
 }
 .links a:hover { border-color: var(--dim); transform: translateX(3px); }
+.links .txt { flex: 1; }
+.copy {
+  font: inherit; font-size: .78rem; font-weight: 700; color: var(--dim); background: none; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; min-height: 40px; transition: color .2s, border-color .2s;
+}
+.copy:hover { color: var(--accent); border-color: var(--accent); }
 .links pre { font-size: 13px; color: var(--accent); flex: none; }
 .links .txt { display: flex; flex-direction: column; min-width: 0; }
 .links strong { font-weight: 700; overflow-wrap: anywhere; }
@@ -245,6 +251,13 @@ footer p { margin: 2px 0; }
 '-'</pre>
         <span class="txt"><strong>The Outdoor Gays</strong><small>YouTube · homestead life in the Laurentians</small></span>
       </a></li>
+      <li><div class="row">
+        <pre class="art" aria-hidden="true">.-.
+|W|
+'-'</pre>
+        <span class="txt"><strong>Rito</strong><small>World of Warcraft · gamertag</small></span>
+        <button type="button" class="copy" data-copy="Rito" aria-label="Copy WoW gamertag Rito">copy</button>
+      </div></li>
     </ul>
   </section>
 
@@ -705,6 +718,17 @@ const NOTE = "";
     if (e.key === "s" || e.key === "S") surprise();
   });
   document.getElementById("ff").addEventListener("click", surprise);
+
+  /* copy buttons */
+  document.querySelectorAll(".copy").forEach(btn => btn.addEventListener("click", async () => {
+    const txt = btn.dataset.copy;
+    try { await navigator.clipboard.writeText(txt); }
+    catch (e) {
+      const ta = document.createElement("textarea"); ta.value = txt; ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (_) {} ta.remove();
+    }
+    btn.textContent = "copied"; setTimeout(() => { btn.textContent = "copy"; }, 1400);
+  }));
 
   /* nav: mark the section in view */
   const navLinks = [...document.querySelectorAll(".nav a[data-sec]")];
