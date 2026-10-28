@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en" data-theme="forest">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>it's Rito</title>
+<meta name="description" content="Rito's corner of the internet: games, cards, cats and the Laurentians.">
+<meta name="theme-color" content="#0b130e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: "Alpha Lyrae";
+  src: url("https://heycristobal.com/vault/assets/fonts/AlphaLyrae-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* ---------- Themes: pure variable sets ---------- */
+:root, :root[data-theme="forest"] {
+  --bg: #0b130e; --panel: #111d16; --line: #1f3a2b;
+  --ink: #d6f5e3; --dim: #7fa892; --accent: #c4d96a; --on-accent: #0b130e;
+  --r-star: #e6eb9a; --r-far: #2b4a37; --r-land: #3f6d4d; --r-tree: #5f9a6b;
+  --r-house: #9cc9a8; --r-cat: #c4d96a; --r-door: #c4d96a; --r-water: #4f8f7a;
+  --r-glow: #c4d96a; --r-ban: #d6f5e3; --r-shd: #3f6d4d; --r-hot: #f1ffd0;
+  --chroma-a: #c4d96a; --chroma-b: #4f8f7a; --glow: #c4d96a33; --glow-blur: 28px;
+  color-scheme: dark;
+}
+:root[data-theme="gameboy"] {
+  /* DMG palette, these four values only */
+  --bg: #0f380f; --panel: #0f380f; --line: #306230;
+  --ink: #9bbc0f; --dim: #8bac0f; --accent: #9bbc0f; --on-accent: #0f380f;
+  --r-star: #9bbc0f; --r-far: #306230; --r-land: #306230; --r-tree: #8bac0f;
+  --r-house: #8bac0f; --r-cat: #9bbc0f; --r-door: #9bbc0f; --r-water: #8bac0f;
+  --r-glow: #9bbc0f; --r-ban: #9bbc0f; --r-shd: #306230; --r-hot: #9bbc0f;
+  --chroma-a: #8bac0f; --chroma-b: #306230; --glow: #306230; --glow-blur: 0px;
+  color-scheme: dark;
+}
+:root[data-theme="meadow"] {
+  --bg: #437d36; --panel: #3a6f2f; --line: #5e9a4c;
+  --ink: #fff8e1; --dim: #dfe9c4; --accent: #d4f582; --on-accent: #23441c;
+  --r-star: #fff8e1; --r-far: #6aa556; --r-land: #8fc173; --r-tree: #c4ea8c;
+  --r-house: #fff8e1; --r-cat: #d4f582; --r-door: #ffe9a8; --r-water: #b8e6d0;
+  --r-glow: #ffe9a8; --r-ban: #fff8e1; --r-shd: #2c5823; --r-hot: #ffffff;
+  --chroma-a: #d4f582; --chroma-b: #b8e6d0; --glow: #fff8e140; --glow-blur: 24px;
+  color-scheme: light;
+}
+:root[data-theme="pines"] {
+  --bg: #071a1c; --panel: #0c2528; --line: #17404a;
+  --ink: #a8f0dc; --dim: #5fa596; --accent: #f2e35c; --on-accent: #071a1c;
+  --r-star: #f2e35c; --r-far: #143a3c; --r-land: #1f5250; --r-tree: #2f7a6a;
+  --r-house: #6fbfae; --r-cat: #a8f0dc; --r-door: #f2e35c; --r-water: #2f7487;
+  --r-glow: #f2e35c; --r-ban: #a8f0dc; --r-shd: #1f5250; --r-hot: #e6fff7;
+  --chroma-a: #a8f0dc; --chroma-b: #2f7487; --glow: #a8f0dc26; --glow-blur: 28px;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.6 "Space Mono", ui-monospace, Menlo, Consolas, monospace;
+  transition: background-color .35s ease, color .35s ease;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+h1, h2, h3 { font-family: "Alpha Lyrae", "Space Mono", monospace; font-weight: 500; margin: 0; }
+h2 { font-size: 1.35rem; color: var(--ink); margin-bottom: 18px; }
+h2::before { content: "> "; color: var(--dim); }
+section { padding: 40px 0 8px; }
+
+pre.art {
+  margin: 0; white-space: pre; line-height: 1.08;
+  font-family: "Space Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+.r-sky{color:var(--r-far)} .r-star{color:var(--r-star)} .r-far{color:var(--r-far)}
+.r-land{color:var(--r-land)} .r-tree{color:var(--r-tree)} .r-house{color:var(--r-house)}
+.r-cat{color:var(--r-cat)} .r-door{color:var(--r-door)} .r-water{color:var(--r-water)}
+.r-glow{color:var(--r-glow)} .r-ban{color:var(--r-ban)} .r-shd{color:var(--r-shd)}
+.hot { color: var(--r-hot); text-shadow: 0 0 8px var(--glow); }
+
+/* ---------- Hero ---------- */
+.hero { padding: 40px 0 8px; text-align: center; }
+.eyebrow { color: var(--dim); font-size: 1rem; letter-spacing: .08em; margin-bottom: 6px; }
+.banner-stage { overflow: hidden; display: flex; justify-content: center; }
+#banner { font-size: 14px; font-weight: 700; cursor: default; }
+.scene {
+  margin-top: 26px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 20px; padding: 16px 8px; overflow: hidden;
+  display: flex; justify-content: center; touch-action: pan-y;
+}
+#scene { font-size: 10px; }
+.tagline { margin: 22px auto 0; font-size: 1rem; }
+.fact { margin: 6px auto 0; color: var(--dim); font-size: .85rem; min-height: 1.6em; }
+.note {
+  margin: 18px auto 0; max-width: 520px; padding: 14px 18px; text-align: left;
+  border: 1px dashed var(--line); border-radius: 14px; background: var(--panel);
+  white-space: pre-wrap;
+}
+
+/* ---------- Theme chips ---------- */
+.themes { padding-top: 32px; text-align: center; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.chip {
+  font: inherit; font-size: .85rem; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; min-height: 44px;
+  cursor: pointer; transition: border-color .2s, transform .2s;
+}
+.chip:hover { border-color: var(--dim); transform: translateY(-1px); }
+.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.chip.surprise { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 700; }
+.hint { margin-top: 10px; color: var(--dim); font-size: .75rem; }
+.hint kbd { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
+
+/* ---------- Cards ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 20px;
+  padding: 18px; display: flex; flex-direction: column; gap: 10px;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-3px); border-color: var(--dim);
+  box-shadow: -3px 0 0 var(--chroma-a), 3px 0 0 var(--chroma-b), 0 0 var(--glow-blur) var(--glow);
+}
+.thumb {
+  border-radius: 14px; border: 1px solid var(--line); background: var(--bg);
+  padding: 14px; display: flex; justify-content: center; overflow: hidden;
+}
+.thumb pre { font-size: 13px; color: var(--r-house); transition: text-shadow .25s; }
+.card:hover .thumb pre { text-shadow: -1px 0 var(--chroma-a), 1px 0 var(--chroma-b); }
+.card h3 { font-size: 1.15rem; }
+.card p { margin: 0; color: var(--dim); font-size: .85rem; }
+.btn {
+  align-self: flex-start; margin-top: 4px; text-decoration: none; font-weight: 700; font-size: .85rem;
+  color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px;
+  min-height: 44px; display: inline-flex; align-items: center; transition: border-color .2s, color .2s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Links ---------- */
+.links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.links a {
+  display: flex; align-items: center; gap: 14px; text-decoration: none;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+  padding: 14px 16px; min-height: 56px; transition: border-color .2s, transform .2s;
+}
+.links a:hover { border-color: var(--dim); transform: translateX(3px); }
+.links pre { font-size: 13px; color: var(--accent); flex: none; }
+.links .txt { display: flex; flex-direction: column; min-width: 0; }
+.links strong { font-weight: 700; overflow-wrap: anywhere; }
+.links small { color: var(--dim); font-size: .78rem; }
+
+/* ---------- Footer ---------- */
+footer.wrap { padding-top: 48px; padding-bottom: 40px; text-align: center; color: var(--dim); font-size: .8rem; }
+footer pre { font-size: 13px; margin-bottom: 12px; }
+footer p { margin: 2px 0; }
+#readout { opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  .card:hover, .chip:hover, .links a:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <h1 class="sr-only">it's Rito</h1>
+    <div class="eyebrow" aria-hidden="true">it's</div>
+    <div class="banner-stage"><pre class="art" id="banner" aria-hidden="true"></pre></div>
+    <div class="scene" id="sceneStage"><pre class="art" id="scene" aria-hidden="true"></pre></div>
+    <p class="tagline">Gamer, gardener, cat staff, commander of rookies.</p>
+    <p class="fact" id="fact" aria-live="polite"></p>
+    <!-- NOTE: write the personal message into the NOTE constant -->
+    <div class="note" id="note" hidden></div>
+  </header>
+
+  <section class="themes" aria-labelledby="themesTitle">
+    <h2 id="themesTitle" class="sr-only">Pick a theme</h2>
+    <div class="chips" id="chips">
+      <button class="chip" data-theme-id="forest" aria-pressed="false">Forest</button>
+      <button class="chip" data-theme-id="gameboy" aria-pressed="false">Game Boy</button>
+      <button class="chip" data-theme-id="meadow" aria-pressed="false">Meadow</button>
+      <button class="chip" data-theme-id="pines" aria-pressed="false">Midnight Pines</button>
+      <button class="chip surprise" id="surprise">Surprise me</button>
+    </div>
+    <p class="hint" aria-hidden="true">press <kbd>S</kbd> for a surprise</p>
+  </section>
+
+  <section aria-labelledby="madeTitle">
+    <h2 id="madeTitle">Made for you</h2>
+    <div class="cards">
+      <article class="card">
+        <div class="thumb"><pre class="art" aria-hidden="true">+----------------+
+| QUEST LOG  Lv7 |
+| [x] feed cats  |
+| [x] water beds |
+| [ ] beat boss  |
+| HP ######....  |
++----------------+</pre></div>
+        <h3>TyQuest Retro</h3>
+        <p>A pixel task tracker, made for Tyler.</p>
+        <a class="btn" href="https://heycristobal.com/interactive-tools/tyquest/">Open TyQuest</a>
+      </article>
+      <article class="card">
+        <div class="thumb"><pre class="art" aria-hidden="true">.------.------.
+|  /\  | .--. |
+| /  \ | |  | |
+|/____\| '--' |
+|------+------|
+| (  ) |  []  |
+'------'------'</pre></div>
+        <h3>eddy, the TCG Binder</h3>
+        <p>Flip through the shape-card binder.</p>
+        <a class="btn" href="https://heycristobal.com/TCG-binder/">Open the binder</a>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="findTitle">
+    <h2 id="findTitle">Find Rito</h2>
+    <ul class="links">
+      <li><a href="https://www.tiktok.com/@rookietocommander" rel="noopener">
+        <pre class="art" aria-hidden="true">.-.
+|d|
+'-'</pre>
+        <span class="txt"><strong>@rookietocommander</strong><small>TikTok · card pulls and Digimon posts</small></span>
+      </a></li>
+      <li><a href="https://www.youtube.com/results?search_query=The+Outdoor+Gays" rel="noopener">
+        <pre class="art" aria-hidden="true">.-.
+|&gt;|
+'-'</pre>
+        <span class="txt"><strong>The Outdoor Gays</strong><small>YouTube · homestead life in the Laurentians</small></span>
+      </a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <pre class="art" aria-hidden="true"><span class="r-tree">/|\ /|\</span>  <span class="r-house">|</span><span class="r-cat">=^.^=</span><span class="r-house">[]</span><span class="r-cat">=^.^=</span><span class="r-house">|</span>  <span class="r-tree">/|\ /|\</span></pre>
+  <p>itsrito.com — built with love in the Laurentians.</p>
+  <p id="readout">theme: forest</p>
+</footer>
+
+<script>
+const NOTE = "";
+
+(() => {
+  "use strict";
+
+  const THEMES = [
+    { id: "forest",  name: "forest" },
+    { id: "gameboy", name: "game boy" },
+    { id: "meadow",  name: "meadow" },
+    { id: "pines",   name: "midnight pines" }
+  ];
+  const VARIANTS = ["hills", "river", "garden"];
+  const FACTS = [
+    "Card hunter: always one pack away from the big pull.",
+    "Godzilla fan. Rooting for the big guy, every time.",
+    "Guitar owner, with plans to play it more. Soon.",
+    "Digimon loyalist, since the very first digivice.",
+    "Switch 2 player, couch co-op certified.",
+    "Tremblant regular, whatever the season."
+  ];
+  const STORE_KEY = "itsrito-theme";
+  const root = document.documentElement;
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let reduced = mq.matches;
+
+  /* ---------- tiny seeded random ---------- */
+  function rng(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  /* ---------- glyph field: grid of {ch, role, tw} ---------- */
+  class Field {
+    constructor(el, mode) { this.el = el; this.mode = mode; this.cells = []; this.W = 0; this.H = 0; }
+    load(grid) {
+      this.H = grid.length; this.W = grid[0].length;
+      this.cells = grid.flat();
+      this.energy = new Float32Array(this.cells.length);
+      this.dirty = true; this.render();
+    }
+    poke(clientX, clientY) {
+      if (reduced) return;
+      const r = this.el.getBoundingClientRect();
+      const cx = (clientX - r.left) / r.width * this.W;
+      const cy = (clientY - r.top) / r.height * this.H;
+      const rx = this.mode === "scramble" ? 3.2 : 4, ry = 2;
+      for (let y = Math.max(0, Math.floor(cy - ry)); y <= Math.min(this.H - 1, Math.ceil(cy + ry)); y++) {
+        for (let x = Math.max(0, Math.floor(cx - rx)); x <= Math.min(this.W - 1, Math.ceil(cx + rx)); x++) {
+          const d = Math.hypot((x + .5 - cx) / rx, (y + .5 - cy) / ry);
+          if (d < 1) { const i = y * this.W + x; this.energy[i] = Math.max(this.energy[i], 1 - d * .6); }
+        }
+      }
+      this.dirty = true; start();
+    }
+    step(dt) {
+      let active = false; const k = Math.pow(0.5, dt / 140);
+      for (let i = 0; i < this.energy.length; i++) {
+        if (this.energy[i] > 0) {
+          this.energy[i] *= k;
+          if (this.energy[i] < 0.04) this.energy[i] = 0;
+          active = true;
+        }
+      }
+      if (active) this.dirty = true;
+      return active;
+    }
+    render() {
+      const SCR = "#%@&*+=:";
+      let html = "";
+      for (let y = 0; y < this.H; y++) {
+        let cls = null, buf = "";
+        for (let x = 0; x < this.W; x++) {
+          const i = y * this.W + x, c = this.cells[i], e = this.energy ? this.energy[i] : 0;
+          let ch = c.ch, k = "r-" + c.role;
+          if (e > 0.2 && ch !== " ") {
+            k += " hot";
+            if (this.mode === "scramble" && e > 0.35) ch = SCR[(Math.random() * SCR.length) | 0];
+          }
+          if (k !== cls) { if (cls !== null) html += `<span class="${cls}">${esc(buf)}</span>`; cls = k; buf = ""; }
+          buf += ch;
+        }
+        html += `<span class="${cls}">${esc(buf)}</span>` + (y < this.H - 1 ? "\n" : "");
+      }
+      this.el.innerHTML = html; this.dirty = false;
+    }
+  }
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  /* ---------- the RITO banner ---------- */
+  const LETTERS = {
+    R: ["XXXXXXXX ","XX     XX","XX     XX","XX     XX","XXXXXXXX ","XX   XX  ","XX    XX ","XX     XX","XX     XX"],
+    I: ["XXXXXX","  XX  ","  XX  ","  XX  ","  XX  ","  XX  ","  XX  ","  XX  ","XXXXXX"],
+    T: ["XXXXXXXXXX","    XX    ","    XX    ","    XX    ","    XX    ","    XX    ","    XX    ","    XX    ","    XX    "],
+    O: [" XXXXXXX ","XX     XX","XX     XX","XX     XX","XX     XX","XX     XX","XX     XX","XX     XX"," XXXXXXX "]
+  };
+  function bannerGrid() {
+    const rows = 9, gap = 2, word = "RITO";
+    const parts = [...word].map(l => LETTERS[l]);
+    const W = parts.reduce((s, p) => s + p[0].length, 0) + gap * (word.length - 1) + 1, H = rows + 1;
+    const on = Array.from({ length: H }, () => new Array(W).fill(false));
+    let ox = 0;
+    parts.forEach(p => { p.forEach((ln, y) => [...ln].forEach((c, x) => { if (c === "X") on[y][ox + x] = true; })); ox += p[0].length + gap; });
+    const g = [];
+    for (let y = 0; y < H; y++) {
+      const row = [];
+      for (let x = 0; x < W; x++) {
+        if (on[y][x]) row.push({ ch: "#", role: "ban" });
+        else if (y > 0 && x > 0 && on[y - 1][x - 1]) row.push({ ch: "%", role: "shd" });
+        else row.push({ ch: " ", role: "sky" });
+      }
+      g.push(row);
+    }
+    return g;
+  }
+
+  /* ---------- landscape scenes, drawn tile by tile ---------- */
+  const SW = 60, SH = 14;
+  const TW_STAR = ["*", "'", ".", "+", "*"];
+  const TW_WATER = ["~", "-", "~", "~", " "];
+  const HOUSE = [
+    "   _________   ",
+    "  /         \\  ",
+    " /___________\\ ",
+    " |=^.^= =^.^=| ",
+    " |-----------| ",
+    " |=^.^= =^.^=| ",
+    " |____[ ]____| "
+  ];
+  const PINE = [" ^ ", "/|\\", "/|\\", " | "];
+  const SPRUCE = [" ^ ", "/|\\", " | "];
+
+  function blank() { return Array.from({ length: SH }, () => Array.from({ length: SW }, () => ({ ch: " ", role: "sky" }))); }
+  function put(g, x, y, ch, role, tw) {
+    if (y < 0 || y >= SH || x < 0 || x >= SW) return;
+    g[y][x] = tw ? { ch, role, tw } : { ch, role };
+  }
+  function ridge(g, h, role, fillCh, fillRole, density, rnd, maxY) {
+    for (let x = 1; x < SW; x++) h[x] = Math.max(h[x - 1] - 1, Math.min(h[x - 1] + 1, h[x]));
+    for (let x = 0; x < SW; x++) {
+      const L = h[x - 1] ?? h[x], R = h[x + 1] ?? h[x];
+      const ch = (L > h[x] && R > h[x]) ? "^" : L > h[x] ? "/" : R > h[x] ? "\\" : "_";
+      put(g, x, h[x], ch, role);
+      for (let y = h[x] + 1; y <= maxY; y++) put(g, x, y, rnd() < density ? fillCh : " ", fillRole);
+    }
+  }
+  function sky(g, rnd, count, maxRow) {
+    for (let n = 0; n < count; n++) {
+      const x = (rnd() * SW) | 0, y = (rnd() * (maxRow + 1)) | 0;
+      if (g[y][x].ch === " ") put(g, x, y, TW_STAR[(rnd() * TW_STAR.length) | 0], "star", TW_STAR);
+    }
+  }
+  function tree(g, x, baseY, big) {
+    const s = big ? PINE : SPRUCE;
+    s.forEach((ln, j) => [...ln].forEach((ch, i) => { if (ch !== " ") put(g, x - 1 + i, baseY - s.length + j, ch, "tree"); }));
+  }
+  function house(g, hx, hy) {
+    HOUSE.forEach((ln, j) => {
+      const a = ln.search(/\S/), b = ln.length - 1 - [...ln].reverse().join("").search(/\S/);
+      for (let i = a; i <= b; i++) {
+        const ch = ln[i];
+        let role = "house";
+        if ((j === 3 || j === 5) && i > 1 && i < 13 && ch !== " ") role = "cat";
+        if (j === 6 && (ch === "[" || ch === "]")) role = "door";
+        put(g, hx + i, hy + j, ch, role);
+      }
+    });
+  }
+  function farHills(rnd, base) {
+    const p1 = rnd() * 6, p2 = rnd() * 6;
+    return Array.from({ length: SW }, (_, x) => Math.max(2, Math.min(8, Math.round(base + 1.5 * Math.sin(x / 7 + p1) + .6 * Math.sin(x / 3.3 + p2)))));
+  }
+
+  const BUILD = {
+    hills(rnd) {
+      const g = blank(); const HX = 38;
+      sky(g, rnd, 14, 3);
+      ridge(g, farHills(rnd, 5), "far", ".", "far", .12, rnd, SH - 1);
+      const p = rnd() * 6;
+      const near = Array.from({ length: SW }, (_, x) => (x >= HX - 1 && x <= HX + 15) ? 11 : Math.round(10 + .9 * Math.sin(x / 5 + p)));
+      ridge(g, near, "land", ":", "land", .45, rnd, SH - 1);
+      [3, 8, 14, 21, 27, 33, 56].forEach((x, n) => tree(g, x, near[x], n % 2 === 0));
+      house(g, HX, 4);
+      return g;
+    },
+    river(rnd) {
+      const g = blank(); const HX = 22;
+      sky(g, rnd, 12, 4);
+      put(g, 52, 1, ")", "glow");
+      ridge(g, farHills(rnd, 5), "far", ".", "far", .1, rnd, 11);
+      const p = rnd() * 6;
+      const near = Array.from({ length: SW }, (_, x) => (x >= HX - 1 && x <= HX + 15) ? 11 : Math.max(10, Math.round(10.4 + .8 * Math.sin(x / 4 + p))));
+      ridge(g, near, "land", ":", "land", .4, rnd, 11);
+      [4, 10, 16, 42, 48, 55].forEach((x, n) => tree(g, x, near[x], n % 2 === 1));
+      house(g, HX, 4);
+      for (let y = 12; y < SH; y++) for (let x = 0; x < SW; x++) {
+        const ch = rnd() < .55 ? "~" : (rnd() < .5 ? "-" : " ");
+        put(g, x, y, ch, "water", TW_WATER);
+      }
+      return g;
+    },
+    garden(rnd) {
+      const g = blank(); const HX = 40;
+      sky(g, rnd, 10, 2);
+      ridge(g, farHills(rnd, 6.5).map(h => Math.max(5, h)), "far", ".", "far", .1, rnd, 10);
+      for (let x = 0; x < SW; x++) put(g, x, 11, "=", "land");
+      for (let y = 3; y < 10; y++) for (let x = 0; x < 38; x++) if (g[y][x].ch === " " && rnd() < .018) put(g, x, y, TW_STAR[(rnd() * 4) | 0], "star", TW_STAR);
+      for (let x = 3; x <= 33; x += 5) {
+        put(g, x, 8, rnd() < .5 ? "@" : "*", "glow");
+        put(g, x - 1, 9, "\\", "tree"); put(g, x, 9, "|", "tree"); put(g, x + 1, 9, "/", "tree");
+        put(g, x, 10, "|", "tree");
+      }
+      for (let x = 34; x <= 39; x++) put(g, x, 10, x % 2 ? "-" : "|", "house");
+      for (let x = 1; x < SW - 1; x++) {
+        put(g, x, 12, x % 3 === 0 ? "v" : (x % 3 === 1 ? "," : " "), x % 3 === 0 ? "tree" : "land");
+        put(g, x, 13, rnd() < .5 ? "." : (rnd() < .5 ? "," : " "), "land");
+      }
+      tree(g, 57, 11, true);
+      house(g, HX, 4);
+      return g;
+    }
+  };
+
+  /* ---------- wiring ---------- */
+  const bannerEl = document.getElementById("banner");
+  const sceneEl = document.getElementById("scene");
+  const banner = new Field(bannerEl, "scramble");
+  const scene = new Field(sceneEl, "brighten");
+  const fields = [banner, scene];
+  let variant = "hills";
+  let factIdx = (Math.random() * FACTS.length) | 0;
+
+  banner.load(bannerGrid());
+  function loadScene(v) { variant = v; scene.load(BUILD[v](rng((Math.random() * 1e9) | 0))); }
+  loadScene(variant);
+
+  const factEl = document.getElementById("fact");
+  factEl.textContent = FACTS[factIdx];
+
+  const noteEl = document.getElementById("note");
+  if (NOTE.trim()) { noteEl.textContent = NOTE; noteEl.hidden = false; }
+
+  /* fit ASCII by font-size so nothing scrolls sideways */
+  function charRatio(el) {
+    const probe = document.createElement("span");
+    probe.textContent = "MMMMMMMMMM"; probe.style.cssText = "position:absolute;visibility:hidden;font-size:100px;white-space:pre";
+    el.appendChild(probe); const w = probe.getBoundingClientRect().width / 1000; probe.remove();
+    return w || 0.62;
+  }
+  function fit(field, stage, maxPx, pad) {
+    const avail = stage.clientWidth - pad;
+    const size = Math.min(maxPx, avail / (field.W * charRatio(field.el) * 1.01));
+    field.el.style.fontSize = Math.max(4, size).toFixed(2) + "px";
+  }
+  const bannerStage = bannerEl.parentElement, sceneStage = document.getElementById("sceneStage");
+  function fitAll() { fit(banner, bannerStage, 22, 0); fit(scene, sceneStage, 16, 18); }
+  fitAll();
+  window.addEventListener("resize", fitAll);
+  if (document.fonts) document.fonts.ready.then(fitAll);
+
+  /* pointer interactions */
+  const onMove = f => e => f.poke(e.clientX, e.clientY);
+  bannerEl.addEventListener("pointermove", onMove(banner));
+  bannerEl.addEventListener("pointerdown", onMove(banner));
+  sceneEl.addEventListener("pointermove", onMove(scene));
+  sceneEl.addEventListener("pointerdown", onMove(scene));
+
+  /* one rAF-throttled loop for twinkle + ripples */
+  let raf = 0, last = 0, lastTw = 0;
+  function twinkle() {
+    let any = false;
+    for (const c of scene.cells) if (c.tw && Math.random() < .3) { c.ch = c.tw[(Math.random() * c.tw.length) | 0]; any = true; }
+    if (any) scene.dirty = true;
+  }
+  function loop(t) {
+    raf = 0;
+    if (reduced || document.hidden) return;
+    if (t - last >= 33) {
+      const dt = last ? Math.min(t - last, 200) : 33; last = t;
+      fields.forEach(f => f.step(dt));
+      if (t - lastTw >= 900) { lastTw = t; twinkle(); }
+      fields.forEach(f => { if (f.dirty) f.render(); });
+    }
+    raf = requestAnimationFrame(loop);
+  }
+  function start() { if (!raf && !reduced && !document.hidden) { last = 0; raf = requestAnimationFrame(loop); } }
+  function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
+  function settle() { fields.forEach(f => { f.energy.fill(0); f.render(); }); }
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
+  const onMotion = () => { reduced = mq.matches; if (reduced) { stop(); settle(); } else start(); };
+  mq.addEventListener ? mq.addEventListener("change", onMotion) : mq.addListener(onMotion);
+  start();
+
+  /* themes */
+  const chips = [...document.querySelectorAll("[data-theme-id]")];
+  const readout = document.getElementById("readout");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(id, save) {
+    const th = THEMES.find(t => t.id === id) || THEMES[0];
+    root.dataset.theme = th.id;
+    chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.themeId === th.id)));
+    readout.textContent = "theme: " + th.name;
+    metaTheme.setAttribute("content", getComputedStyle(root).getPropertyValue("--bg").trim());
+    if (save) { try { localStorage.setItem(STORE_KEY, th.id); } catch (e) {} }
+  }
+  let saved = null;
+  try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
+  applyTheme(saved || "forest", false);
+  chips.forEach(c => c.addEventListener("click", () => applyTheme(c.dataset.themeId, true)));
+
+  function pickOther(list, current) {
+    const opts = list.filter(x => x !== current);
+    return opts[(Math.random() * opts.length) | 0];
+  }
+  function surprise() {
+    applyTheme(pickOther(THEMES.map(t => t.id), root.dataset.theme), true);
+    loadScene(pickOther(VARIANTS, variant));
+    factIdx = pickOther(FACTS.map((_, i) => i), factIdx);
+    factEl.textContent = FACTS[factIdx];
+    sceneEl.dataset.variant = variant;
+  }
+  sceneEl.dataset.variant = variant;
+  document.getElementById("surprise").addEventListener("click", surprise);
+  document.addEventListener("keydown", e => {
+    if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
+    if (e.key === "s" || e.key === "S") surprise();
+  });
+})();
+</script>
+</body>
+</html>
