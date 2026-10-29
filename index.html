@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="forest">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,14 +17,42 @@
   font-display: swap;
 }
 
-/* ---------- Forest palette ---------- */
-:root {
+/* ---------- Themes: pure variable sets ---------- */
+:root, :root[data-theme="forest"] {
   --bg: #0b130e; --panel: #111d16; --line: #1f3a2b;
   --ink: #d6f5e3; --dim: #7fa892; --accent: #c4d96a; --on-accent: #0b130e;
   --r-star: #e6eb9a; --r-far: #2b4a37; --r-land: #3f6d4d; --r-tree: #5f9a6b;
   --r-house: #9cc9a8; --r-cat: #c4d96a; --r-door: #c4d96a; --r-water: #4f8f7a;
   --r-glow: #c4d96a; --r-ban: #d6f5e3; --r-shd: #3f6d4d; --r-hot: #f1ffd0;
   --chroma-a: #c4d96a; --chroma-b: #4f8f7a; --glow: #c4d96a33; --glow-blur: 28px;
+  color-scheme: dark;
+}
+:root[data-theme="gameboy"] {
+  /* DMG palette, these four values only */
+  --bg: #0f380f; --panel: #0f380f; --line: #306230;
+  --ink: #9bbc0f; --dim: #8bac0f; --accent: #9bbc0f; --on-accent: #0f380f;
+  --r-star: #9bbc0f; --r-far: #306230; --r-land: #306230; --r-tree: #8bac0f;
+  --r-house: #8bac0f; --r-cat: #9bbc0f; --r-door: #9bbc0f; --r-water: #8bac0f;
+  --r-glow: #9bbc0f; --r-ban: #9bbc0f; --r-shd: #306230; --r-hot: #9bbc0f;
+  --chroma-a: #8bac0f; --chroma-b: #306230; --glow: #306230; --glow-blur: 0px;
+  color-scheme: dark;
+}
+:root[data-theme="meadow"] {
+  --bg: #437d36; --panel: #3a6f2f; --line: #5e9a4c;
+  --ink: #fff8e1; --dim: #dfe9c4; --accent: #d4f582; --on-accent: #23441c;
+  --r-star: #fff8e1; --r-far: #6aa556; --r-land: #8fc173; --r-tree: #c4ea8c;
+  --r-house: #fff8e1; --r-cat: #d4f582; --r-door: #ffe9a8; --r-water: #b8e6d0;
+  --r-glow: #ffe9a8; --r-ban: #fff8e1; --r-shd: #2c5823; --r-hot: #ffffff;
+  --chroma-a: #d4f582; --chroma-b: #b8e6d0; --glow: #fff8e140; --glow-blur: 24px;
+  color-scheme: light;
+}
+:root[data-theme="pines"] {
+  --bg: #071a1c; --panel: #0c2528; --line: #17404a;
+  --ink: #a8f0dc; --dim: #5fa596; --accent: #f2e35c; --on-accent: #071a1c;
+  --r-star: #f2e35c; --r-far: #143a3c; --r-land: #1f5250; --r-tree: #2f7a6a;
+  --r-house: #6fbfae; --r-cat: #a8f0dc; --r-door: #f2e35c; --r-water: #2f7487;
+  --r-glow: #f2e35c; --r-ban: #a8f0dc; --r-shd: #1f5250; --r-hot: #e6fff7;
+  --chroma-a: #a8f0dc; --chroma-b: #2f7487; --glow: #a8f0dc26; --glow-blur: 28px;
   color-scheme: dark;
 }
 
@@ -55,53 +83,17 @@ pre.art {
 .r-glow{color:var(--r-glow)} .r-ban{color:var(--r-ban)} .r-shd{color:var(--r-shd)}
 .hot { color: var(--r-hot); text-shadow: 0 0 8px var(--glow); }
 
-/* ---------- Nav pill + top-right socials ---------- */
-html { scroll-behavior: smooth; scroll-padding-top: 92px; }
-.nav {
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 6;
-  display: flex; align-items: center; gap: 2px; padding: 6px 8px; border-radius: 999px;
-  background: rgba(22, 38, 29, .78); border: 1px solid rgba(214, 245, 227, .06);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-}
-.nav a, .nav button {
-  font: 14px/1 "Space Mono", ui-monospace, monospace; color: var(--dim); text-decoration: none;
-  background: none; border: 0; cursor: pointer; padding: 11px 16px; border-radius: 999px; transition: color .2s;
-}
-.nav a:hover, .nav button:hover { color: var(--ink); }
-.nav a[aria-current="true"] { color: var(--ink); font-weight: 700; }
-.nav #ff { padding: 9px 12px; display: inline-flex; align-items: center; }
-.nav #ff svg { width: 18px; height: 14px; display: block; }
-.socials { position: fixed; top: 22px; right: 12px; display: flex; gap: 2px; z-index: 6; }
-.socials a { width: 44px; height: 44px; display: grid; place-items: center; color: var(--dim); transition: color .2s, transform .2s; }
-.socials a:hover { color: var(--ink); transform: translateY(-1px); }
-.socials svg { width: 22px; height: 22px; fill: currentColor; }
-@media (max-width: 640px) {
-  .nav { left: 12px; transform: none; top: 14px; padding: 4px 6px; }
-  .nav a, .nav button { padding: 10px 9px; font-size: 13px; }
-  .nav #ff { padding: 8px 9px; }
-  .socials { top: 16px; right: 6px; }
-}
-@media (max-width: 359px) { .nav a, .nav button { padding: 10px 6px; font-size: 12px; } }
-
 /* ---------- Hero ---------- */
-.hero { padding: 96px 0 8px; text-align: center; }
+.hero { padding: 40px 0 8px; text-align: center; }
 .eyebrow { color: var(--dim); font-size: 1rem; letter-spacing: .08em; margin-bottom: 6px; }
 .banner-stage { overflow: hidden; display: flex; justify-content: center; }
 #banner { font-size: 14px; font-weight: 700; cursor: default; }
 .scene {
   margin-top: 26px; background: var(--panel); border: 1px solid var(--line);
-  border-radius: 20px; overflow: hidden; position: relative;
-  height: clamp(230px, 38vw, 340px); touch-action: pan-y;
+  border-radius: 20px; padding: 16px 8px; overflow: hidden;
+  display: flex; justify-content: center; touch-action: pan-y;
 }
-#scene { display: block; width: 100%; height: 100%; }
-.wx {
-  position: absolute; top: 12px; right: 12px; z-index: 1; pointer-events: none; text-align: right;
-  padding: 8px 12px; border-radius: 12px; font-size: 12px; line-height: 1.55; color: var(--ink);
-  background: rgba(10, 21, 16, .58); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-}
-.wx b { font-weight: 700; display: block; }
-.wx span { color: var(--dim); }
-@media (max-width: 520px) { .wx { top: 8px; right: 8px; padding: 5px 9px; font-size: 10px; line-height: 1.45; } }
+#scene { font-size: 10px; }
 .tagline { margin: 22px auto 0; font-size: 1rem; }
 .fact { margin: 6px auto 0; color: var(--dim); font-size: .85rem; min-height: 1.6em; }
 .note {
@@ -111,7 +103,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 }
 
 /* ---------- Theme chips ---------- */
-.themes { padding-top: 28px; text-align: center; }
+.themes { padding-top: 32px; text-align: center; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .chip {
   font: inherit; font-size: .85rem; color: var(--ink); background: var(--panel);
@@ -119,6 +111,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 92px; }
   cursor: pointer; transition: border-color .2s, transform .2s;
 }
 .chip:hover { border-color: var(--dim); transform: translateY(-1px); }
+.chip[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
 .chip.surprise { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 700; }
 .hint { margin-top: 10px; color: var(--dim); font-size: .75rem; }
 .hint kbd { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
@@ -151,18 +144,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 
 /* ---------- Links ---------- */
 .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.links a, .links .row {
+.links a {
   display: flex; align-items: center; gap: 14px; text-decoration: none;
   background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
   padding: 14px 16px; min-height: 56px; transition: border-color .2s, transform .2s;
 }
 .links a:hover { border-color: var(--dim); transform: translateX(3px); }
-.links .txt { flex: 1; }
-.copy {
-  font: inherit; font-size: .78rem; font-weight: 700; color: var(--dim); background: none; cursor: pointer;
-  border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; min-height: 40px; transition: color .2s, border-color .2s;
-}
-.copy:hover { color: var(--accent); border-color: var(--accent); }
 .links pre { font-size: 13px; color: var(--accent); flex: none; }
 .links .txt { display: flex; flex-direction: column; min-width: 0; }
 .links strong { font-weight: 700; overflow-wrap: anywhere; }
@@ -172,52 +159,110 @@ html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 footer.wrap { padding-top: 48px; padding-bottom: 40px; text-align: center; color: var(--dim); font-size: .8rem; }
 footer pre { font-size: 13px; margin-bottom: 12px; }
 footer p { margin: 2px 0; }
+#readout { opacity: .8; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
   .card:hover, .chip:hover, .links a:hover { transform: none; }
 }
+
+  /* --- Played this year: tilt cover cards (Quiet Pixel tilt, themed) --- */
+  .games-row { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+  .tilt-scene {
+    --ma: 14deg; --oz: 4em; --dz: 2.4em; --fn: cubic-bezier(.22,.61,.36,1);
+    display: grid; overflow: hidden; perspective: 65em; color: var(--ink);
+    padding: 10px; margin: -10px;
+  }
+  .tilt-scene > * { grid-area: 1 / 1; }
+  .tilt-grid { display: grid; grid-template-columns: repeat(7, 1fr); z-index: 3; }
+  .tilt-card {
+    --di: calc(2*var(--ti, 3)/6 - 1);
+    --dj: calc(1 - 2*var(--tj, 3)/6);
+    container-type: size;
+    position: relative;
+    width: clamp(220px, 62vmin, 300px);
+    aspect-ratio: 2 / 3;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    transform-origin: 50% 50% var(--oz);
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--dj)*var(--ma))) rotateY(calc(var(--di)*var(--ma)));
+    box-shadow: 0 24px 48px -16px rgba(0,0,0,0.45);
+    background: var(--panel);
+    transition: transform 0.4s var(--fn);
+  }
+  .tilt-card::before {
+    content: ''; position: absolute; inset: -50%; z-index: 1;
+    translate: calc(var(--di, 0)*-40%) calc(var(--dj, 0)*40%);
+    opacity: clamp(0, calc(var(--ti, -1) + 1), 1);
+    background: radial-gradient(65cqw, var(--glow), transparent);
+    transition: translate 0.4s var(--fn), opacity 0.4s var(--fn);
+    border-radius: 50%; pointer-events: none;
+  }
+  .tilt-card img.cover {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; border-radius: 19px; display: block;
+  }
+  .tilt-shade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 52%; z-index: 1;
+    background: linear-gradient(transparent, rgba(4,10,6,0.82));
+    border-radius: 0 0 19px 19px; pointer-events: none;
+  }
+  .tilt-caption {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    translate: 0 0 var(--dz); padding: 14px 16px 15px; text-align: left;
+  }
+  .tilt-caption h3 { font-size: 15.5px; line-height: 1.3; margin: 0 0 5px; color: #f4fff8; }
+  .tilt-caption p { font-size: 11.5px; line-height: 1.5; margin: 0 0 9px; color: #cfe8d8; }
+  .chip-console {
+    display: inline-block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--line); background: var(--bg);
+    border-radius: 999px; padding: 3px 9px;
+  }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 1):hover) { --ti: 0 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 1):hover) { --tj: 0 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 2):hover) { --ti: 1 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 8):hover) { --tj: 1 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 3):hover) { --ti: 2 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 15):hover) { --tj: 2 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 4):hover) { --ti: 3 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 22):hover) { --tj: 3 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 5):hover) { --ti: 4 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 29):hover) { --tj: 4 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 6):hover) { --ti: 5 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 36):hover) { --tj: 5 }
+  .tilt-scene:has(.tilt-trap:nth-child(7n + 7):hover) { --ti: 6 }
+  .tilt-scene:has(.tilt-trap:nth-child(n + 43):hover) { --tj: 6 }
+  @media (prefers-reduced-motion: reduce) { .tilt-card { transform: none; transition: none; } }
 </style>
 </head>
 <body>
-<nav class="nav" aria-label="Sections">
-  <a href="#top" data-sec="top" aria-current="true">home</a>
-  <a href="#apps" data-sec="apps">apps</a>
-  <a href="#find" data-sec="find">find</a>
-  <button type="button" id="ff" title="Surprise me (S)" aria-label="Surprise me"><svg viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 2.2v9.6L9 7z"/><path d="M10.5 2.2v9.6L18 7z"/></svg></button>
-</nav>
-<nav class="socials" aria-label="Rito elsewhere">
-  <a href="https://www.tiktok.com/@rookietocommander" rel="noopener" aria-label="TikTok: @rookietocommander" title="TikTok">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6Z"/></svg>
-  </a>
-  <a href="https://www.youtube.com/@fondforest" rel="noopener" aria-label="YouTube: Fond Forest" title="YouTube">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9l5.8 3.1-5.8 3.1Z"/></svg>
-  </a>
-  <a href="https://www.twitch.tv/ritorevolto" rel="noopener" aria-label="Twitch: ritorevolto" title="Twitch">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0 1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-  </a>
-</nav>
-
 <main class="wrap">
 
-  <header class="hero" id="top">
+  <header class="hero">
     <h1 class="sr-only">it's Rito</h1>
     <div class="eyebrow" aria-hidden="true">it's</div>
     <div class="banner-stage"><pre class="art" id="banner" aria-hidden="true"></pre></div>
-    <div class="scene" id="sceneStage"><canvas id="scene" aria-hidden="true"></canvas><div class="wx" aria-live="polite"><b>Labelle, QC</b><span id="wxNow">checking the sky…</span></div></div>
-    <p class="tagline">Not your average gamer, cat dad, commander of rookies.</p>
+    <div class="scene" id="sceneStage"><pre class="art" id="scene" aria-hidden="true"></pre></div>
+    <p class="tagline">Gamer, gardener, cat staff, commander of rookies.</p>
     <p class="fact" id="fact" aria-live="polite"></p>
     <!-- NOTE: write the personal message into the NOTE constant -->
     <div class="note" id="note" hidden></div>
   </header>
 
-  <section class="themes" aria-label="Surprise">
-    <button class="chip surprise" id="surprise">Surprise me</button>
+  <section class="themes" aria-labelledby="themesTitle">
+    <h2 id="themesTitle" class="sr-only">Pick a theme</h2>
+    <div class="chips" id="chips">
+      <button class="chip" data-theme-id="forest" aria-pressed="false">Forest</button>
+      <button class="chip" data-theme-id="gameboy" aria-pressed="false">Game Boy</button>
+      <button class="chip" data-theme-id="meadow" aria-pressed="false">Meadow</button>
+      <button class="chip" data-theme-id="pines" aria-pressed="false">Midnight Pines</button>
+      <button class="chip surprise" id="surprise">Surprise me</button>
+    </div>
     <p class="hint" aria-hidden="true">press <kbd>S</kbd> for a surprise</p>
   </section>
 
-  <section id="apps" aria-labelledby="madeTitle">
+  <section aria-labelledby="madeTitle">
     <h2 id="madeTitle">Made for you</h2>
     <div class="cards">
       <article class="card">
@@ -247,23 +292,52 @@ footer p { margin: 2px 0; }
     </div>
   </section>
 
-  <section id="find" aria-labelledby="findTitle">
+
+  <section aria-labelledby="playedTitle">
+    <h2 id="playedTitle">Played this year</h2>
+    <div class="games-row">
+      <div class="tilt-scene">
+        <div class="tilt-card">
+          <img class="cover" src="games/time-stranger.jpg" alt="Digimon Story Time Stranger cover art">
+          <div class="tilt-shade" aria-hidden="true"></div>
+          <div class="tilt-caption">
+            <h3>Digimon Story: Time Stranger</h3>
+            <p>Raising digital monsters. Saving two worlds.</p>
+            <span class="chip-console">Steam</span>
+          </div>
+        </div>
+        <div class="tilt-grid" aria-hidden="true"><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div></div>
+      </div>
+      <div class="tilt-scene">
+        <div class="tilt-card">
+          <img class="cover" src="games/legends-za.jpg" alt="Pokémon Legends: Z-A key art — Lumiose City at night">
+          <div class="tilt-shade" aria-hidden="true"></div>
+          <div class="tilt-caption">
+            <h3>Pokémon Legends: Z-A</h3>
+            <p>Back in Lumiose City, after dark.</p>
+            <span class="chip-console">Nintendo Switch 2</span>
+          </div>
+        </div>
+        <div class="tilt-grid" aria-hidden="true"><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div><div class="tilt-trap"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="findTitle">
     <h2 id="findTitle">Find Rito</h2>
     <ul class="links">
-      <li><div class="row">
+      <li><a href="https://www.tiktok.com/@rookietocommander" rel="noopener">
         <pre class="art" aria-hidden="true">.-.
-|W|
+|d|
 '-'</pre>
-        <span class="txt"><strong>Rito</strong><small>World of Warcraft · gamertag</small></span>
-        <button type="button" class="copy" data-copy="Rito" aria-label="Copy WoW gamertag Rito">copy</button>
-      </div></li>
-      <li><div class="row">
+        <span class="txt"><strong>@rookietocommander</strong><small>TikTok · card pulls and Digimon posts</small></span>
+      </a></li>
+      <li><a href="https://www.youtube.com/results?search_query=The+Outdoor+Gays" rel="noopener">
         <pre class="art" aria-hidden="true">.-.
-|@|
+|&gt;|
 '-'</pre>
-        <span class="txt"><strong>@rito</strong><small>Discord · username</small></span>
-        <button type="button" class="copy" data-copy="rito" aria-label="Copy Discord username rito">copy</button>
-      </div></li>
+        <span class="txt"><strong>The Outdoor Gays</strong><small>YouTube · homestead life in the Laurentians</small></span>
+      </a></li>
     </ul>
   </section>
 
@@ -272,6 +346,7 @@ footer p { margin: 2px 0; }
 <footer class="wrap">
   <pre class="art" aria-hidden="true"><span class="r-tree">/|\ /|\</span>  <span class="r-house">|</span><span class="r-cat">=^.^=</span><span class="r-house">[]</span><span class="r-cat">=^.^=</span><span class="r-house">|</span>  <span class="r-tree">/|\ /|\</span></pre>
   <p>itsrito.com — built with love in the Laurentians.</p>
+  <p id="readout">theme: forest</p>
 </footer>
 
 <script>
@@ -280,7 +355,13 @@ const NOTE = "";
 (() => {
   "use strict";
 
-  const VARIANTS = ["lake", "hills", "garden"];
+  const THEMES = [
+    { id: "forest",  name: "forest" },
+    { id: "gameboy", name: "game boy" },
+    { id: "meadow",  name: "meadow" },
+    { id: "pines",   name: "midnight pines" }
+  ];
+  const VARIANTS = ["hills", "river", "garden"];
   const FACTS = [
     "Card hunter: always one pack away from the big pull.",
     "Godzilla fan. Rooting for the big guy, every time.",
@@ -289,8 +370,22 @@ const NOTE = "";
     "Switch 2 player, couch co-op certified.",
     "Tremblant regular, whatever the season."
   ];
+  const STORE_KEY = "itsrito-theme";
+  const root = document.documentElement;
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   let reduced = mq.matches;
+
+  /* ---------- tiny seeded random ---------- */
+  function rng(seed) {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
 
   /* ---------- glyph field: grid of {ch, role, tw} ---------- */
   class Field {
@@ -376,486 +471,212 @@ const NOTE = "";
     return g;
   }
 
-  /* ---------- the scene: a tile-drawn Labelle, in Forest greens, on Labelle's clock ---------- */
-  const PALETTES = {
-    day: {
-      skyTop: "#86b897", skyLow: "#d3e8cc",
-      far: "#9cc3a6", farCap: "#b7d5bd", near: "#6f9e7c", water: "#7fb3b0", waterHi: "#b8dcd5",
-      grass: "#5c8c61", pine: "#3f7d4f", pineDk: "#2f6a42", trunk: "#6b5236",
-      wall: "#e3edd2", wall2: "#d3e2c0", roof: "#4f7a3e", win: "#cfe3e8", door: "#5c4630",
-      stone: "#87a088", cloud: "#f3f8ee", cloudGrey: "#c3cfc0", canoe: "#a0643a", soil: "#6b5a3a", bloom: "#f2e35c",
-      sun: ["#f4d85c", "#f7e78e"], star: null, fly: null,
-      bird: "rgba(28,52,36,.6)", smoke: "rgba(245,250,240,"
+  /* ---------- landscape scenes, drawn tile by tile ---------- */
+  const SW = 60, SH = 14;
+  const TW_STAR = ["*", "'", ".", "+", "*"];
+  const TW_WATER = ["~", "-", "~", "~", " "];
+  const HOUSE = [
+    "   _________   ",
+    "  /         \\  ",
+    " /___________\\ ",
+    " |=^.^= =^.^=| ",
+    " |-----------| ",
+    " |=^.^= =^.^=| ",
+    " |____[ ]____| "
+  ];
+  const PINE = [" ^ ", "/|\\", "/|\\", " | "];
+  const SPRUCE = [" ^ ", "/|\\", " | "];
+
+  function blank() { return Array.from({ length: SH }, () => Array.from({ length: SW }, () => ({ ch: " ", role: "sky" }))); }
+  function put(g, x, y, ch, role, tw) {
+    if (y < 0 || y >= SH || x < 0 || x >= SW) return;
+    g[y][x] = tw ? { ch, role, tw } : { ch, role };
+  }
+  function ridge(g, h, role, fillCh, fillRole, density, rnd, maxY) {
+    for (let x = 1; x < SW; x++) h[x] = Math.max(h[x - 1] - 1, Math.min(h[x - 1] + 1, h[x]));
+    for (let x = 0; x < SW; x++) {
+      const L = h[x - 1] ?? h[x], R = h[x + 1] ?? h[x];
+      const ch = (L > h[x] && R > h[x]) ? "^" : L > h[x] ? "/" : R > h[x] ? "\\" : "_";
+      put(g, x, h[x], ch, role);
+      for (let y = h[x] + 1; y <= maxY; y++) put(g, x, y, rnd() < density ? fillCh : " ", fillRole);
+    }
+  }
+  function sky(g, rnd, count, maxRow) {
+    for (let n = 0; n < count; n++) {
+      const x = (rnd() * SW) | 0, y = (rnd() * (maxRow + 1)) | 0;
+      if (g[y][x].ch === " ") put(g, x, y, TW_STAR[(rnd() * TW_STAR.length) | 0], "star", TW_STAR);
+    }
+  }
+  function tree(g, x, baseY, big) {
+    const s = big ? PINE : SPRUCE;
+    s.forEach((ln, j) => [...ln].forEach((ch, i) => { if (ch !== " ") put(g, x - 1 + i, baseY - s.length + j, ch, "tree"); }));
+  }
+  function house(g, hx, hy) {
+    HOUSE.forEach((ln, j) => {
+      const a = ln.search(/\S/), b = ln.length - 1 - [...ln].reverse().join("").search(/\S/);
+      for (let i = a; i <= b; i++) {
+        const ch = ln[i];
+        let role = "house";
+        if ((j === 3 || j === 5) && i > 1 && i < 13 && ch !== " ") role = "cat";
+        if (j === 6 && (ch === "[" || ch === "]")) role = "door";
+        put(g, hx + i, hy + j, ch, role);
+      }
+    });
+  }
+  function farHills(rnd, base) {
+    const p1 = rnd() * 6, p2 = rnd() * 6;
+    return Array.from({ length: SW }, (_, x) => Math.max(2, Math.min(8, Math.round(base + 1.5 * Math.sin(x / 7 + p1) + .6 * Math.sin(x / 3.3 + p2)))));
+  }
+
+  const BUILD = {
+    hills(rnd) {
+      const g = blank(); const HX = 38;
+      sky(g, rnd, 14, 3);
+      ridge(g, farHills(rnd, 5), "far", ".", "far", .12, rnd, SH - 1);
+      const p = rnd() * 6;
+      const near = Array.from({ length: SW }, (_, x) => (x >= HX - 1 && x <= HX + 15) ? 11 : Math.round(10 + .9 * Math.sin(x / 5 + p)));
+      ridge(g, near, "land", ":", "land", .45, rnd, SH - 1);
+      [3, 8, 14, 21, 27, 33, 56].forEach((x, n) => tree(g, x, near[x], n % 2 === 0));
+      house(g, HX, 4);
+      return g;
     },
-    dusk: {
-      skyTop: "#27443e", skyLow: "#cfa865",
-      far: "#4a6a5a", farCap: "#5f8070", near: "#33503f", water: "#3d5f63", waterHi: "#8aa58a",
-      grass: "#25402f", pine: "#3a7a50", pineDk: "#2d6342", trunk: "#4f3e2a",
-      wall: "#5a7a62", wall2: "#4f6e58", roof: "#6b8a4a", win: "#f2c96a", door: "#2a3a2e",
-      stone: "#3f5246", cloud: "#8a8a62", cloudGrey: "#5f6650", canoe: "#a87a45", soil: "#3a3322", bloom: "#f2c96a",
-      sun: ["#f0a24c", "#f4c06e"], star: "#f3eed0", fly: "#e6eb9a",
-      bird: "rgba(20,36,28,.65)", smoke: "rgba(220,225,200,"
+    river(rnd) {
+      const g = blank(); const HX = 22;
+      sky(g, rnd, 12, 4);
+      put(g, 52, 1, ")", "glow");
+      ridge(g, farHills(rnd, 5), "far", ".", "far", .1, rnd, 11);
+      const p = rnd() * 6;
+      const near = Array.from({ length: SW }, (_, x) => (x >= HX - 1 && x <= HX + 15) ? 11 : Math.max(10, Math.round(10.4 + .8 * Math.sin(x / 4 + p))));
+      ridge(g, near, "land", ":", "land", .4, rnd, 11);
+      [4, 10, 16, 42, 48, 55].forEach((x, n) => tree(g, x, near[x], n % 2 === 1));
+      house(g, HX, 4);
+      for (let y = 12; y < SH; y++) for (let x = 0; x < SW; x++) {
+        const ch = rnd() < .55 ? "~" : (rnd() < .5 ? "-" : " ");
+        put(g, x, y, ch, "water", TW_WATER);
+      }
+      return g;
     },
-    night: {
-      skyTop: "#0a1510", skyLow: "#122219",
-      far: "#1f3a30", farCap: "#2e5243", near: "#152a20", water: "#12303a", waterHi: "#2b5a66",
-      grass: "#0f2219", pine: "#3d8a57", pineDk: "#2c6b43", trunk: "#4a3a26",
-      wall: "#3f6150", wall2: "#375845", roof: "#6b8a4a", win: "#c4d96a", door: "#1a2c22",
-      stone: "#26362d", cloud: "#16281f", cloudGrey: "#1d2c24", canoe: "#9c8a55", soil: "#2b2a1b", bloom: "#c4d96a",
-      sun: ["#e6eb9a", "#cdd788"], star: "#d6f5e3", fly: "#e6eb9a",
-      bird: "rgba(214,245,227,.6)", smoke: "rgba(156,201,168,"
+    garden(rnd) {
+      const g = blank(); const HX = 40;
+      sky(g, rnd, 10, 2);
+      ridge(g, farHills(rnd, 6.5).map(h => Math.max(5, h)), "far", ".", "far", .1, rnd, 10);
+      for (let x = 0; x < SW; x++) put(g, x, 11, "=", "land");
+      for (let y = 3; y < 10; y++) for (let x = 0; x < 38; x++) if (g[y][x].ch === " " && rnd() < .018) put(g, x, y, TW_STAR[(rnd() * 4) | 0], "star", TW_STAR);
+      for (let x = 3; x <= 33; x += 5) {
+        put(g, x, 8, rnd() < .5 ? "@" : "*", "glow");
+        put(g, x - 1, 9, "\\", "tree"); put(g, x, 9, "|", "tree"); put(g, x + 1, 9, "/", "tree");
+        put(g, x, 10, "|", "tree");
+      }
+      for (let x = 34; x <= 39; x++) put(g, x, 10, x % 2 ? "-" : "|", "house");
+      for (let x = 1; x < SW - 1; x++) {
+        put(g, x, 12, x % 3 === 0 ? "v" : (x % 3 === 1 ? "," : " "), x % 3 === 0 ? "tree" : "land");
+        put(g, x, 13, rnd() < .5 ? "." : (rnd() < .5 ? "," : " "), "land");
+      }
+      tree(g, 57, 11, true);
+      house(g, HX, 4);
+      return g;
     }
   };
-  let phase = "night", P = PALETTES.night;
-  const MONO = '"Space Mono", ui-monospace, Menlo, Consolas, monospace';
-  const hexRgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
-  const chC = hex => phase === "day"
-    ? `rgba(${hexRgb(hex).map(v => Math.round(v * .55)).join(",")},.35)`
-    : `rgba(${hexRgb(hex).map(v => Math.min(255, v + 85)).join(",")},.5)`;
-
-  let seed = 1;
-  function hash(x, y) {
-    let h = Math.imul((x | 0) + seed * 7919, 374761393) ^ Math.imul(y | 0, 668265263);
-    h = Math.imul(h ^ (h >>> 13), 1274126177); h ^= h >>> 16;
-    return (h >>> 0) / 4294967296;
-  }
-  function noise1(x, s) { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return hash(i, s) * (1 - u) + hash(i + 1, s) * u; }
-  const fbm = (x, s) => noise1(x, s) * .6 + noise1(x * 2.1, s + 7) * .3 + noise1(x * 4.3, s + 13) * .1;
-
-  const TZ = "America/Toronto", LAT = 46.283, LON = -74.733;   // Labelle, QC
-  const qs = new URLSearchParams(location.search);
-  const atH = parseFloat(qs.get("at")), wxOverride = qs.has("wx") ? +qs.get("wx") : null;
-  const live = { code: wxOverride, temp: null, wind: null, ok: wxOverride != null };
-  const fmtParts = new Intl.DateTimeFormat("en-US", { timeZone: TZ, year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "2-digit", hour12: false });
-  const fmtPretty = new Intl.DateTimeFormat("en-US", { timeZone: TZ, hour: "numeric", minute: "2-digit" });
-  const sunCache = {};
-  // sunrise / sunset for Labelle on a given date (NOAA approximation), in Labelle local hours
-  function sunTimes(y, mo, d, offsetH) {
-    const key = `${y}-${mo}-${d}`; if (sunCache[key]) return sunCache[key];
-    const doy = Math.round((Date.UTC(y, mo - 1, d) - Date.UTC(y, 0, 0)) / 864e5), rad = Math.PI / 180;
-    const g = 2 * Math.PI / 365 * (doy - 1);
-    const eqt = 229.18 * (.000075 + .001868 * Math.cos(g) - .032077 * Math.sin(g) - .014615 * Math.cos(2 * g) - .040849 * Math.sin(2 * g));
-    const dec = .006918 - .399912 * Math.cos(g) + .070257 * Math.sin(g) - .006758 * Math.cos(2 * g) + .000907 * Math.sin(2 * g) - .002697 * Math.cos(3 * g) + .00148 * Math.sin(3 * g);
-    const ha = Math.acos(Math.cos(90.833 * rad) / (Math.cos(LAT * rad) * Math.cos(dec)) - Math.tan(LAT * rad) * Math.tan(dec)) / rad;
-    const rise = ((720 - 4 * (LON + ha) - eqt) / 60 + offsetH + 24) % 24;
-    const set = ((720 - 4 * (LON - ha) - eqt) / 60 + offsetH + 24) % 24;
-    return (sunCache[key] = { rise, set });
-  }
-  let tCache = null, tCacheAt = 0;
-  function labelleTime() {
-    const now = Date.now();
-    if (tCache && now - tCacheAt < 1000) return tCache;
-    const d = new Date(now);
-    const pt = Object.fromEntries(fmtParts.formatToParts(d).map(x => [x.type, x.value]));
-    let hours = (+pt.hour % 24) + (+pt.minute) / 60;
-    const utcH = d.getUTCHours() + d.getUTCMinutes() / 60;
-    let off = hours - utcH; if (off > 12) off -= 24; if (off < -12) off += 24;
-    const sun = sunTimes(+pt.year, +pt.month, +pt.day, Math.round(off * 2) / 2);
-    let pretty = fmtPretty.format(d).toLowerCase();
-    if (!isNaN(atH)) { hours = ((atH % 24) + 24) % 24; const hh = Math.floor(hours), mm = Math.round((hours - hh) * 60); pretty = `${(hh % 12) || 12}:${String(mm).padStart(2, "0")} ${hh < 12 ? "am" : "pm"}`; }
-    tCache = { hours, pretty, rise: sun.rise, set: sun.set }; tCacheAt = now;
-    return tCache;
-  }
-  const WX = c => c == null ? null : c === 0 ? "clear" : c <= 2 ? "a few clouds" : c === 3 ? "grey skies" :
-    c <= 48 ? "fog" : c <= 57 ? "drizzle" : c <= 67 ? "rain" : c <= 77 ? "snow" : c <= 82 ? "showers" : c <= 86 ? "snow squalls" : "thunder";
-  const precip = c => c == null ? "none" : (c >= 71 && c <= 77) || c === 85 || c === 86 ? "snow" : (c >= 51 && c <= 67) || (c >= 80 && c <= 82) || c >= 95 ? "rain" : "none";
-  const cloudCount = c => c == null ? 3 : c === 0 ? 1 : c <= 2 ? 3 : 5;
-  const greySky = c => c != null && c >= 3;
-  async function fetchWeather() {
-    if (wxOverride != null) { updateWx(); return; }
-    try {
-      const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code,wind_speed_10m&timezone=${encodeURIComponent(TZ)}`);
-      if (!r.ok) throw 0;
-      const j = await r.json();
-      live.temp = Math.round(j.current.temperature_2m); live.code = j.current.weather_code; live.wind = Math.round(j.current.wind_speed_10m); live.ok = true;
-    } catch (e) { live.ok = false; }
-    updateWx();
-  }
-  const wxNow = document.getElementById("wxNow");
-  function updateWx() {
-    const tm = labelleTime(), bits = [];
-    if (live.ok && live.code != null) bits.push(WX(live.code));
-    if (live.ok && live.temp != null) bits.push(`${live.temp}°C`);
-    bits.push(tm.pretty);
-    if (live.ok && live.wind >= 25) bits.push("windy");
-    wxNow.textContent = bits.join(" · ");
-  }
-  function phaseFor(tm) {
-    const h = tm.hours, { rise, set } = tm;
-    if (h >= rise + .6 && h <= set - .6) return "day";
-    if ((h >= rise - .75 && h < rise + .6) || (h > set - .6 && h <= set + .75)) return "dusk";
-    return "night";
-  }
-  function setPhase() {
-    const p = phaseFor(labelleTime());
-    if (p === phase && staticLayer.width) return false;
-    phase = p; P = PALETTES[p]; canvas.dataset.phase = p;
-    buildStatic(); return true;
-  }
-
-  const canvas = document.getElementById("scene"), ctx = canvas.getContext("2d");
-  const stageEl = document.getElementById("sceneStage");
-  const staticLayer = document.createElement("canvas"), sctx = staticLayer.getContext("2d");
-  let W = 0, H = 0, CELL = 14, TILE = 12, cols = 0, rows = 0, ox = 0, oy = 0;
-  let horizon = 0, lakeH = 0, shoreTop = 0, house = null, gardenL = 0, variant = "lake";
-  let clouds = [], stars = [], flies = [], flakes = [], flock = null, nextFlock = 2.5, canoe = null;
-  let windowCats = [1, 0, 0, 1], catTimer = 3, t = 0;
-  const pointer = { x: -9999, y: -9999 };
-
-  function tile(g, c, r, color, ch, chColor) {
-    const x = ox + c * CELL + (CELL - TILE) / 2, y = oy + r * CELL + (CELL - TILE) / 2;
-    g.fillStyle = color;
-    if (g.roundRect) { g.beginPath(); g.roundRect(x, y, TILE, TILE, Math.max(1, TILE * .17)); g.fill(); }
-    else g.fillRect(x, y, TILE, TILE);
-    if (ch) { g.fillStyle = chColor; g.fillText(ch, x + TILE / 2, y + TILE / 2 + .5); }
-  }
-  function setFont(g, k = .72) { g.font = `700 ${Math.max(6, Math.round(TILE * k))}px ${MONO}`; g.textAlign = "center"; g.textBaseline = "middle"; }
-
-  function layout() {
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-    W = stageEl.clientWidth; H = stageEl.clientHeight;
-    for (const [cv, g] of [[canvas, ctx], [staticLayer, sctx]]) {
-      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    CELL = W < 520 ? 10 : W < 820 ? 12 : 14; TILE = CELL - 2;
-    cols = Math.ceil(W / CELL) + 1; rows = Math.ceil(H / CELL) + 1;
-    ox = (W - cols * CELL) / 2; oy = (H - rows * CELL) / 2;
-    horizon = Math.round(rows * .6);
-    lakeH = variant === "lake" ? Math.max(3, Math.round(rows * .14)) : 0;
-    shoreTop = horizon + lakeH;
-    const hw = 9, hc = Math.min(cols - hw - 3, Math.round(cols * (W < 600 ? .6 : .6)));
-    house = { c: hc, w: hw, base: rows - 2 };
-    gardenL = Math.max(1, hc - 14);
-    const shapes = [["..####......", ".#######.##.", "############"], ["...###..", ".######.", "########"], ["..##.###..", "##########"]];
-    clouds = [];
-    for (let i = 0; i < 5; i++) clouds.push({ shape: shapes[i % 3], x: (i * .21 + .05) * cols, y: 1 + Math.round(hash(i, 9) * 4), speed: .2 + hash(i, 3) * .3 });
-    flakes = [];
-    stars = [];
-    const nStars = Math.round(cols * horizon * .06);
-    for (let i = 0; i < nStars; i++) stars.push({ c: Math.floor(hash(i, 41) * cols), r: Math.floor(hash(i, 43) * (horizon - 3)), ph: hash(i, 47) * 6.28, big: hash(i, 49) > .82 });
-    flies = [];
-    const nFlies = Math.max(8, Math.round(cols * .35));
-    for (let i = 0; i < nFlies; i++) {
-      const fx = hash(i, 61) * W, fy = oy + (horizon - 2 + hash(i, 63) * (rows - horizon)) * CELL;
-      flies.push({ x: fx, y: fy, hx: fx, hy: fy, vx: 0, vy: 0, ph: hash(i, 67) * 6.28 });
-    }
-    canoe = variant === "lake" ? { x: Math.max(2, (house.c - 9) * .5), dir: 1 } : null;
-    flock = null; nextFlock = 2.5;
-    buildStatic();
-  }
-
-  /* hills, water, ground, pines, the house: drawn once per layout */
-  function buildStatic() {
-    if (!cols) return;
-    const g = sctx;
-    g.clearRect(0, 0, W, H); setFont(g);
-    const tall = variant === "hills" ? 12 : 9;
-    for (let c = 0; c < cols; c++) {
-      const farTop = horizon - Math.round(3 + fbm(c * .045, 1) * Math.min(tall, horizon - 7));
-      for (let r = farTop; r < horizon; r++) tile(g, c, r, r < farTop + 2 ? P.farCap : P.far, r === farTop ? "_" : (hash(c, r) > .9 ? "." : ""), chC(P.far));
-      const nearTop = horizon - Math.round(1 + fbm(c * .09 + 30, 2) * (variant === "hills" ? 6 : 4));
-      for (let r = nearTop; r < horizon; r++) tile(g, c, r, P.near, hash(c, r + 99) > .85 ? ":" : "", chC(P.near));
-      if (hash(c, 501) > (variant === "hills" ? .5 : .72)) {
-        const h = 1 + Math.floor(hash(c, 502) * 3);
-        for (let k = 0; k < h; k++) tile(g, c, nearTop - 1 - k, k === h - 1 ? P.pine : P.pineDk, k === h - 1 ? "^" : "", chC(P.pine));
-      }
-      if (variant === "lake") for (let r = horizon; r < shoreTop; r++) tile(g, c, r, P.water, (c + r) % 3 === 0 ? "~" : "", chC(P.water));
-      for (let r = shoreTop; r < rows - 1; r++) tile(g, c, r, P.grass, hash(c, r + 7) > .88 ? (variant === "hills" ? '"' : ",") : "", chC(P.grass));
-      tile(g, c, rows - 1, P.stone, "=", chC(P.stone));
-    }
-    const { c: hc, w: hw, base } = house;
-    // garden beds: soil rows with blooms, behind a little fence
-    if (variant === "garden") {
-      for (let c = gardenL; c < hc - 2; c++) {
-        tile(g, c, base - 4, P.trunk, c % 2 ? "-" : "+", chC(P.trunk));
-        for (let r = base - 3; r <= base; r++) {
-          if ((r - base) % 2 === 0) tile(g, c, r, P.soil, hash(c, r) > .45 ? (hash(c, r + 3) > .5 ? "*" : "@") : ".", hash(c, r) > .45 ? P.bloom : chC(P.soil));
-          else tile(g, c, r, P.pineDk, hash(c, r) > .5 ? "v" : "", chC(P.pine));
-        }
-      }
-    }
-    // foreground pines
-    const busy = c => (c >= hc - 2 && c <= hc + hw + 1) || (variant === "garden" && c >= gardenL - 2 && c < hc) || (variant === "lake" && c >= hc - 8 && c < hc);
-    const gap = variant === "hills" ? .5 : .66;
-    for (let c = 1; c < cols - 1; c++) {
-      if (busy(c) || hash(c, 777) < gap) continue;
-      const h = 3 + Math.floor(hash(c, 778) * Math.max(1, Math.min(6, rows - horizon - 2)));
-      tile(g, c, base, P.trunk, "|", chC(P.trunk));
-      for (let k = 1; k <= h; k++) {
-        const r = base - k, half = Math.max(0, Math.round((h - k) / 2.6));
-        for (let d = -half; d <= half; d++) if (c + d >= 0 && c + d < cols) tile(g, c + d, r, (d + k) % 2 ? P.pineDk : P.pine, k === h ? "^" : (d === 0 ? "|" : ""), chC(P.pine));
-      }
-      c += 2;
-    }
-    // the house: two storeys, two windows each, so the cats get their own floors
-    for (let r = base - 5; r <= base; r++) for (let c = hc; c < hc + hw; c++) tile(g, c, r, r <= base - 3 ? P.wall2 : P.wall, r === base - 3 ? "-" : "", chC(P.wall));
-    for (let k = 0; k < 4; k++) {
-      const r = base - 6 - k;
-      for (let c = hc - 1 + k; c <= hc + hw - k; c++) tile(g, c, r, P.roof, c === hc - 1 + k ? "/" : c === hc + hw - k ? "\\" : (k === 3 ? "^" : ""), chC(P.roof));
-    }
-    tile(g, hc + hw - 3, base - 10, P.stone, "H", chC(P.stone));
-    tile(g, hc + hw - 3, base - 9, P.stone, "", "");
-    tile(g, hc + 4, base, P.door, "|", chC(P.door));
-    tile(g, hc + 4, base - 1, P.door, "o", chC(P.door));
-    if (variant === "lake") for (let c = hc - 7; c < hc - 1; c++) tile(g, c, shoreTop - 1, P.trunk, "=", chC(P.trunk));
-  }
-
-  const windowSpots = () => {
-    const { c: hc, w: hw, base } = house;
-    return [[hc + 1, base - 1], [hc + hw - 2, base - 1], [hc + 1, base - 4], [hc + hw - 2, base - 4]];
-  };
-
-  function bodyPos(tm) {
-    const { hours: h, rise, set } = tm, day = h >= rise && h <= set;
-    const span = day ? (h - rise) / (set - rise) : ((h - set + 24) % 24) / (24 - (set - rise));
-    const x = cols * (.08 + .84 * span);
-    const y = horizon - 1 - Math.sin(Math.PI * span) * (horizon - 6);
-    return { x, y, day };
-  }
-  function drawBody(g) {
-    const { x, y, day } = bodyPos(labelleTime());
-    const R = (W < 600 ? 2 : 2.8) + (day ? .4 : 0);
-    const px = ox + x * CELL + CELL / 2, py = oy + y * CELL + CELL / 2;
-    const glow = day ? (phase === "dusk" ? "240,162,76" : "255,244,190") : "230,235,154";
-    const halo = g.createRadialGradient(px, py, 0, px, py, CELL * 9);
-    halo.addColorStop(0, `rgba(${glow},${day ? .3 : .14})`); halo.addColorStop(1, `rgba(${glow},0)`);
-    g.fillStyle = halo; g.fillRect(px - CELL * 9, py - CELL * 9, CELL * 18, CELL * 18);
-    const [c1, c2] = day ? P.sun : PALETTES.night.sun;
-    for (let r = Math.floor(y - R); r <= Math.ceil(y + R); r++) for (let c = Math.floor(x - R); c <= Math.ceil(x + R); c++) {
-      const d = Math.hypot(c - x, r - y); if (d > R) continue;
-      if (day) tile(g, c, r, d < R * .6 ? c1 : c2, d < R * .6 ? "@" : "o", "rgba(255,250,225,.85)");
-      else { const cr = hash(c * 3 + 1, r * 5 + 2); tile(g, c, r, d < R * .55 ? c1 : c2, cr > .8 ? "o" : cr > .66 ? "." : "", "rgba(60,80,50,.45)"); }
-    }
-  }
-
-  function newFlock() {
-    const n = 7, fromRight = Math.random() > .5;
-    flock = { x: fromRight ? W + 60 : -120, y: H * (.1 + Math.random() * .22), dir: fromRight ? -1 : 1, birds: [] };
-    for (let i = 0; i < n; i++) {
-      const k = Math.ceil(i / 2), side = i % 2 ? -1 : 1, bx = -flock.dir * k * 14, by = side * k * 8;
-      flock.birds.push({ ox: bx, oy: by, x: flock.x + bx, y: flock.y + by, vx: 0, vy: 0, ph: i * .7, fright: 0 });
-    }
-  }
-
-  function render(steady) {
-    if (!W) return;
-    setPhase();
-    const sky = ctx.createLinearGradient(0, 0, 0, H);
-    sky.addColorStop(0, P.skyTop); sky.addColorStop(.65, P.skyLow);
-    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
-    setFont(ctx, .9); ctx.fillStyle = P.star || "#fff";
-    const starK = !P.star || greySky(live.code) ? 0 : phase === "dusk" ? .35 : 1;
-    if (starK) for (const s of stars) {
-      ctx.globalAlpha = starK * (steady ? .5 : .2 + .45 * (.5 + .5 * Math.sin(t * 1.3 + s.ph)));
-      ctx.fillText(s.big ? "+" : ".", ox + s.c * CELL + CELL / 2, oy + s.r * CELL + CELL / 2);
-    }
-    ctx.globalAlpha = 1;
-    setFont(ctx);
-    if (!(live.code >= 3)) drawBody(ctx);
-    const cloudCol = greySky(live.code) ? P.cloudGrey : P.cloud;
-    clouds.slice(0, cloudCount(live.code)).forEach(cl => cl.shape.forEach((row, j) => {
-      for (let i = 0; i < row.length; i++) if (row[i] === "#") {
-        const c = Math.floor(cl.x) + i; if (c < -1 || c > cols) continue;
-        tile(ctx, c, cl.y + j, cloudCol, hash(i, j + cl.y) > .8 ? "~" : "", chC(cloudCol));
-      }
-    }));
-    ctx.drawImage(staticLayer, 0, 0, W, H);
-    if (variant === "lake") {
-      for (let r = horizon; r < shoreTop; r++) for (let c = 0; c < cols; c++) {
-        const v = noise1(c * .35 + t * .6 * (r % 2 ? 1 : -1), r * 13);
-        if (v > (steady ? .8 : .74)) tile(ctx, c, r, P.waterHi, "~", chC(P.water));
-      }
-      if (canoe) {
-        const r = horizon + Math.floor(lakeH / 2);
-        setFont(ctx, 1.05); ctx.fillStyle = P.canoe;
-        ctx.fillText("\\_i_/", ox + Math.round(canoe.x) * CELL, oy + r * CELL + CELL / 2 + (steady ? 0 : Math.sin(t * 2) * 1.2));
-        setFont(ctx);
-      }
-    }
-    // windows: lit after dark, panes by day; the cats take turns
-    const lit = phase !== "day";
-    windowSpots().forEach(([c, r], i) => {
-      const cat = windowCats[i] > 0;
-      tile(ctx, c, r, P.win, cat ? "^" : (lit ? "#" : "+"), cat ? "rgba(12,24,16,.9)" : (lit ? "rgba(80,96,30,.55)" : "rgba(60,90,100,.55)"));
-    });
-    if (!steady) {
-      const cx = house.c + house.w - 3, cy = house.base - 11;
-      for (let k = 0; k < 5; k++) {
-        const life = (t * .35 + k / 5) % 1;
-        const c = cx + Math.round(Math.sin(life * 3 + k) * 1.2 + life * 2 * Math.min(1.5, (live.wind != null ? live.wind : 6) / 12));
-        ctx.globalAlpha = (1 - life) * .7;
-        tile(ctx, c, cy - Math.round(life * 7), P.smoke + ".8)", "", "");
-      }
-      ctx.globalAlpha = 1;
-    }
-    // fog settles over the hills
-    if (live.code === 45 || live.code === 48) {
-      const fy = oy + (horizon - 7) * CELL, fh = CELL * 9, fg = ctx.createLinearGradient(0, fy, 0, fy + fh);
-      const c = hexRgb(P.skyLow).join(",");
-      fg.addColorStop(0, `rgba(${c},0)`); fg.addColorStop(.5, `rgba(${c},.55)`); fg.addColorStop(1, `rgba(${c},0)`);
-      ctx.fillStyle = fg; ctx.fillRect(0, fy, W, fh);
-    }
-    // rain or snow, straight from Labelle's forecast
-    if (!flakes.length && precip(live.code) !== "none") update(0);
-    if (flakes.length) {
-      setFont(ctx, 1);
-      const kind = precip(live.code);
-      ctx.fillStyle = kind === "snow" ? (phase === "day" ? "rgba(255,255,255,.95)" : "rgba(230,240,232,.8)") : (phase === "day" ? "rgba(30,64,58,.75)" : "rgba(170,210,200,.55)");
-      for (const f of flakes) ctx.fillText(f.ch, f.x, f.y);
-      setFont(ctx);
-    }
-    // fireflies, only after dark and when it's dry
-    if (P.fly && precip(live.code) === "none") for (const f of flies) {
-      const a = steady ? .6 : .25 + .75 * Math.max(0, Math.sin(t * 1.7 + f.ph));
-      const gl = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, CELL * .9);
-      gl.addColorStop(0, `rgba(230,235,154,${.35 * a})`); gl.addColorStop(1, "rgba(230,235,154,0)");
-      ctx.fillStyle = gl; ctx.fillRect(f.x - CELL, f.y - CELL, CELL * 2, CELL * 2);
-      ctx.globalAlpha = a; ctx.fillStyle = P.fly; ctx.fillRect(f.x - 1, f.y - 1, 2, 2); ctx.globalAlpha = 1;
-    }
-    if (flock) {
-      setFont(ctx, 1); ctx.fillStyle = P.bird;
-      for (const b of flock.birds) ctx.fillText(steady ? "v" : (Math.sin(t * (6 + b.fright * 10) + b.ph) > 0 ? "v" : "^"), b.x, b.y);
-      setFont(ctx);
-    }
-  }
-
-  function update(dt) {
-    t += dt;
-    const wind = live.wind != null ? live.wind : 6;
-    for (const cl of clouds) { cl.x += dt * cl.speed * (.4 + wind / 12); if (cl.x > cols + 2) cl.x = -cl.shape[0].length - 2; }
-    if (canoe) {
-      canoe.x += dt * .35 * canoe.dir;
-      if (canoe.x > house.c - 10) canoe.dir = -1;
-      if (canoe.x < 2) canoe.dir = 1;
-    }
-    const kind = precip(live.code);
-    const want = kind === "none" ? 0 : Math.round((W * H) / (kind === "snow" ? 3200 : 2600));
-    while (flakes.length < want) flakes.push({ x: Math.random() * W, y: Math.random() * H, ch: kind === "snow" ? (Math.random() > .5 ? "*" : ".") : "|", v: kind === "snow" ? 16 + Math.random() * 20 : 220 + Math.random() * 100 });
-    if (flakes.length > want) flakes.length = want;
-    for (const f of flakes) {
-      f.y += f.v * dt; f.x += (kind === "snow" ? Math.sin(t + f.y * .02) * .4 : 0) + wind * .03;
-      if (f.y > H) { f.y = -8; f.x = Math.random() * W; }
-      if (f.x > W) f.x = 0;
-    }
-    catTimer -= dt;
-    if (catTimer <= 0) {
-      catTimer = 2.5 + Math.random() * 4;
-      const i = Math.floor(Math.random() * 4);
-      windowCats[i] = windowCats[i] ? 0 : 1;
-      if (windowCats.reduce((a, b) => a + b, 0) > 2) windowCats[(i + 2) % 4] = 0;
-    }
-    // fireflies drift around home, and drift over to say hi to the pointer
-    const damp = Math.pow(.2, dt);
-    flies.forEach((f, i) => {
-      let ax = (noise1(t * .4 + i * 3.1, i) - .5) * 60 + (f.hx - f.x) * .4;
-      let ay = (noise1(t * .4 + i * 5.7, i + 50) - .5) * 40 + (f.hy - f.y) * .4;
-      const dx = pointer.x - f.x, dy = pointer.y - f.y, d = Math.hypot(dx, dy);
-      if (d < 130 && d > 8) { ax += dx / d * 90; ay += dy / d * 90; }
-      f.vx = (f.vx + ax * dt) * damp; f.vy = (f.vy + ay * dt) * damp;
-      f.x += f.vx * dt; f.y += f.vy * dt;
-    });
-    // geese: the V glides over; each bird springs to its slot but flees the pointer
-    nextFlock -= dt;
-    if (!flock && nextFlock <= 0) newFlock();
-    if (flock) {
-      flock.x += flock.dir * dt * 44;
-      flock.y += Math.sin(t * .7) * dt * 3;
-      for (const b of flock.birds) {
-        let ax = (flock.x + b.ox - b.x) * 3.2, ay = (flock.y + b.oy - b.y) * 3.2;
-        const dx = b.x - pointer.x, dy = b.y - pointer.y, d = Math.hypot(dx, dy);
-        if (d < 110 && d > .01) {
-          const push = (1 - d / 110) * 2400;
-          ax += dx / d * push; ay += dy / d * push - push * .35;
-          b.fright = Math.min(1, b.fright + dt * 4);
-        } else b.fright = Math.max(0, b.fright - dt * .8);
-        b.vx = (b.vx + ax * dt) * Math.pow(.12, dt); b.vy = (b.vy + ay * dt) * Math.pow(.12, dt);
-        b.x += b.vx * dt; b.y += b.vy * dt;
-      }
-      if (flock.x < -220 || flock.x > W + 220) { flock = null; nextFlock = 6 + Math.random() * 8; }
-    }
-  }
 
   /* ---------- wiring ---------- */
   const bannerEl = document.getElementById("banner");
+  const sceneEl = document.getElementById("scene");
   const banner = new Field(bannerEl, "scramble");
+  const scene = new Field(sceneEl, "brighten");
+  const fields = [banner, scene];
+  let variant = "hills";
   let factIdx = (Math.random() * FACTS.length) | 0;
+
   banner.load(bannerGrid());
+  function loadScene(v) { variant = v; scene.load(BUILD[v](rng((Math.random() * 1e9) | 0))); }
+  loadScene(variant);
 
   const factEl = document.getElementById("fact");
   factEl.textContent = FACTS[factIdx];
+
   const noteEl = document.getElementById("note");
   if (NOTE.trim()) { noteEl.textContent = NOTE; noteEl.hidden = false; }
 
-  /* fit the banner by font-size so nothing scrolls sideways */
+  /* fit ASCII by font-size so nothing scrolls sideways */
   function charRatio(el) {
     const probe = document.createElement("span");
     probe.textContent = "MMMMMMMMMM"; probe.style.cssText = "position:absolute;visibility:hidden;font-size:100px;white-space:pre";
     el.appendChild(probe); const w = probe.getBoundingClientRect().width / 1000; probe.remove();
     return w || 0.62;
   }
-  function fitBanner() {
-    const size = Math.min(22, bannerEl.parentElement.clientWidth / (banner.W * charRatio(bannerEl) * 1.01));
-    bannerEl.style.fontSize = Math.max(4, size).toFixed(2) + "px";
+  function fit(field, stage, maxPx, pad) {
+    const avail = stage.clientWidth - pad;
+    const size = Math.min(maxPx, avail / (field.W * charRatio(field.el) * 1.01));
+    field.el.style.fontSize = Math.max(4, size).toFixed(2) + "px";
   }
+  const bannerStage = bannerEl.parentElement, sceneStage = document.getElementById("sceneStage");
+  function fitAll() { fit(banner, bannerStage, 22, 0); fit(scene, sceneStage, 16, 18); }
+  fitAll();
+  window.addEventListener("resize", fitAll);
+  if (document.fonts) document.fonts.ready.then(fitAll);
 
-  /* pointer */
-  bannerEl.addEventListener("pointermove", e => banner.poke(e.clientX, e.clientY));
-  bannerEl.addEventListener("pointerdown", e => banner.poke(e.clientX, e.clientY));
-  const track = e => { const r = canvas.getBoundingClientRect(); pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top; };
-  canvas.addEventListener("pointermove", track, { passive: true });
-  canvas.addEventListener("pointerdown", track, { passive: true });
-  canvas.addEventListener("pointerleave", () => { pointer.x = pointer.y = -9999; });
+  /* pointer interactions */
+  const onMove = f => e => f.poke(e.clientX, e.clientY);
+  bannerEl.addEventListener("pointermove", onMove(banner));
+  bannerEl.addEventListener("pointerdown", onMove(banner));
+  sceneEl.addEventListener("pointermove", onMove(scene));
+  sceneEl.addEventListener("pointerdown", onMove(scene));
 
-  /* one rAF loop, throttled to ~30fps, paused when hidden */
-  let raf = 0, last = 0, acc = 0, sceneOn = true;
-  function frame(ts) {
-    raf = requestAnimationFrame(frame);
-    const now = ts / 1000, dt = last ? Math.min(.1, now - last) : 0;
-    last = now; acc += dt;
-    if (acc < 1 / 30) return;
-    banner.step(acc * 1000); if (banner.dirty) banner.render();
-    if (sceneOn) { update(acc); render(false); }
-    acc = 0;
+  /* one rAF-throttled loop for twinkle + ripples */
+  let raf = 0, last = 0, lastTw = 0;
+  function twinkle() {
+    let any = false;
+    for (const c of scene.cells) if (c.tw && Math.random() < .3) { c.ch = c.tw[(Math.random() * c.tw.length) | 0]; any = true; }
+    if (any) scene.dirty = true;
   }
-  function start() { if (!raf && !reduced && !document.hidden) { last = 0; acc = 0; raf = requestAnimationFrame(frame); } }
-  function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
-  function sync() {
-    reduced = mq.matches;
-    if (!document.hidden && !reduced) start();
-    else { stop(); banner.energy.fill(0); banner.render(); render(true); }
+  function loop(t) {
+    raf = 0;
+    if (reduced || document.hidden) return;
+    if (t - last >= 33) {
+      const dt = last ? Math.min(t - last, 200) : 33; last = t;
+      fields.forEach(f => f.step(dt));
+      if (t - lastTw >= 900) { lastTw = t; twinkle(); }
+      fields.forEach(f => { if (f.dirty) f.render(); });
+    }
+    raf = requestAnimationFrame(loop);
   }
-  document.addEventListener("visibilitychange", sync);
-  mq.addEventListener ? mq.addEventListener("change", sync) : mq.addListener(sync);
-  if ("IntersectionObserver" in window) new IntersectionObserver(([en]) => { sceneOn = en.isIntersecting; }, { threshold: .01 }).observe(stageEl);
+  function start() { if (!raf && !reduced && !document.hidden) { last = 0; raf = requestAnimationFrame(loop); } }
+  function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
+  function settle() { fields.forEach(f => { f.energy.fill(0); f.render(); }); }
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
+  const onMotion = () => { reduced = mq.matches; if (reduced) { stop(); settle(); } else start(); };
+  mq.addEventListener ? mq.addEventListener("change", onMotion) : mq.addListener(onMotion);
+  start();
 
-  let rt = 0;
-  window.addEventListener("resize", () => { fitBanner(); clearTimeout(rt); rt = setTimeout(() => { layout(); render(!raf); }, 120); });
-  if (document.fonts) document.fonts.ready.then(() => { fitBanner(); buildStatic(); render(!raf); });
-
-  fitBanner();
-  phase = phaseFor(labelleTime()); P = PALETTES[phase]; canvas.dataset.phase = phase;
-  layout();
-  render(true);
-  sync();
-  updateWx();
-  fetchWeather();
-  setInterval(fetchWeather, 15 * 60 * 1000);
-  setInterval(() => { updateWx(); if (!raf) render(true); }, 30 * 1000);
-  canvas.dataset.variant = variant;
+  /* themes */
+  const chips = [...document.querySelectorAll("[data-theme-id]")];
+  const readout = document.getElementById("readout");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(id, save) {
+    const th = THEMES.find(t => t.id === id) || THEMES[0];
+    root.dataset.theme = th.id;
+    chips.forEach(c => c.setAttribute("aria-pressed", String(c.dataset.themeId === th.id)));
+    readout.textContent = "theme: " + th.name;
+    metaTheme.setAttribute("content", getComputedStyle(root).getPropertyValue("--bg").trim());
+    if (save) { try { localStorage.setItem(STORE_KEY, th.id); } catch (e) {} }
+  }
+  let saved = null;
+  try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
+  applyTheme(saved || "forest", false);
+  chips.forEach(c => c.addEventListener("click", () => applyTheme(c.dataset.themeId, true)));
 
   function pickOther(list, current) {
     const opts = list.filter(x => x !== current);
     return opts[(Math.random() * opts.length) | 0];
   }
   function surprise() {
-    variant = pickOther(VARIANTS, variant);
-    seed = 1 + ((Math.random() * 9999) | 0);
-    layout(); render(!raf);
-    canvas.dataset.variant = variant;
+    applyTheme(pickOther(THEMES.map(t => t.id), root.dataset.theme), true);
+    loadScene(pickOther(VARIANTS, variant));
     factIdx = pickOther(FACTS.map((_, i) => i), factIdx);
     factEl.textContent = FACTS[factIdx];
+    sceneEl.dataset.variant = variant;
   }
+  sceneEl.dataset.variant = variant;
   document.getElementById("surprise").addEventListener("click", surprise);
   document.addEventListener("keydown", e => {
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
@@ -863,31 +684,6 @@ const NOTE = "";
     if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
     if (e.key === "s" || e.key === "S") surprise();
   });
-  document.getElementById("ff").addEventListener("click", surprise);
-
-  /* copy buttons */
-  document.querySelectorAll(".copy").forEach(btn => btn.addEventListener("click", async () => {
-    const txt = btn.dataset.copy;
-    try { await navigator.clipboard.writeText(txt); }
-    catch (e) {
-      const ta = document.createElement("textarea"); ta.value = txt; ta.style.cssText = "position:fixed;opacity:0";
-      document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (_) {} ta.remove();
-    }
-    btn.textContent = "copied"; setTimeout(() => { btn.textContent = "copy"; }, 1400);
-  }));
-
-  /* nav: mark the section in view */
-  const navLinks = [...document.querySelectorAll(".nav a[data-sec]")];
-  const secs = navLinks.map(a => document.getElementById(a.dataset.sec));
-  function markNav() {
-    const y = window.scrollY + window.innerHeight * .35;
-    let cur = secs[0];
-    for (const sct of secs) if (sct.offsetTop <= y) cur = sct;
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = secs[secs.length - 1];
-    navLinks.forEach(a => a.setAttribute("aria-current", String(a.dataset.sec === cur.id)));
-  }
-  window.addEventListener("scroll", markNav, { passive: true });
-  markNav();
 })();
 </script>
 </body>
