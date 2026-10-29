@@ -174,7 +174,7 @@ footer p { margin: 2px 0; }
     padding: 10px; margin: -10px;
   }
   .tilt-scene > * { grid-area: 1 / 1; }
-  .tilt-grid { display: grid; grid-template-columns: repeat(7, 1fr); z-index: 3; }
+  .tilt-grid { display: grid; grid-template-columns: repeat(7, 1fr); z-index: 3; height: 68%; align-self: start; }
   .tilt-card {
     --di: calc(2*var(--ti, 3)/6 - 1);
     --dj: calc(1 - 2*var(--tj, 3)/6);
@@ -234,6 +234,16 @@ footer p { margin: 2px 0; }
   .tilt-scene:has(.tilt-trap:nth-child(7n + 7):hover) { --ti: 6 }
   .tilt-scene:has(.tilt-trap:nth-child(n + 43):hover) { --tj: 6 }
   @media (prefers-reduced-motion: reduce) { .tilt-card { transform: none; transition: none; } }
+
+  .stars { display: flex; gap: 1px; align-items: center; margin: 1px 0 9px; min-height: 21px; }
+  .star {
+    background: none; border: 0; padding: 2px 1px; cursor: pointer;
+    font-size: 17px; line-height: 1; color: #7d9a89; font-family: inherit;
+    transition: transform .15s ease, color .15s ease;
+  }
+  .star:hover { transform: scale(1.2); }
+  .star.on { color: var(--accent); }
+  .rate-note { font-size: 10.5px; color: #cfe8d8; margin-left: 7px; letter-spacing: .04em; }
 </style>
 </head>
 <body>
@@ -302,7 +312,8 @@ footer p { margin: 2px 0; }
           <div class="tilt-shade" aria-hidden="true"></div>
           <div class="tilt-caption">
             <h3>Digimon Story: Time Stranger</h3>
-            <p>Raising digital monsters. Saving two worlds.</p>
+            <p>Bandai Namco Entertainment</p>
+            <div class="stars" role="radiogroup" aria-label="Your rating for Digimon Story: Time Stranger" data-game="time-stranger"></div>
             <span class="chip-console">Steam</span>
           </div>
         </div>
@@ -314,7 +325,8 @@ footer p { margin: 2px 0; }
           <div class="tilt-shade" aria-hidden="true"></div>
           <div class="tilt-caption">
             <h3>Pokémon Legends: Z-A</h3>
-            <p>Back in Lumiose City, after dark.</p>
+            <p>Nintendo · The Pokémon Company</p>
+            <div class="stars" role="radiogroup" aria-label="Your rating for Pokémon Legends: Z-A" data-game="legends-za"></div>
             <span class="chip-console">Nintendo Switch 2</span>
           </div>
         </div>
@@ -683,6 +695,46 @@ const NOTE = "";
     const tag = (e.target.tagName || "").toLowerCase();
     if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
     if (e.key === "s" || e.key === "S") surprise();
+  });
+})();
+</script>
+
+<script>
+// Star ratings for Played this year — saved per game in localStorage.
+(function () {
+  document.querySelectorAll('.stars').forEach(function (box) {
+    var key = 'itsrito.rating.' + box.dataset.game;
+    var saved = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+    var note = document.createElement('span');
+    note.className = 'rate-note'; note.setAttribute('aria-live', 'polite');
+    var btns = [];
+    function paint(n) {
+      btns.forEach(function (b, i) {
+        b.classList.toggle('on', i < n);
+        b.setAttribute('aria-checked', i === n - 1 ? 'true' : 'false');
+      });
+      note.textContent = n ? n + ' / 5' : '';
+    }
+    for (var v = 1; v <= 5; v++) {
+      (function (val) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'star'; b.textContent = '\u2605';
+        b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
+        b.setAttribute('aria-label', 'Rate ' + val + ' star' + (val > 1 ? 's' : ''));
+        b.addEventListener('mouseenter', function () { paint(val); });
+        b.addEventListener('mouseleave', function () { paint(saved); });
+        b.addEventListener('focus', function () { paint(val); });
+        b.addEventListener('blur', function () { paint(saved); });
+        b.addEventListener('click', function () {
+          saved = (saved === val) ? 0 : val;   // tap the same star again to clear
+          if (saved) localStorage.setItem(key, String(saved)); else localStorage.removeItem(key);
+          paint(saved);
+        });
+        btns.push(b); box.appendChild(b);
+      })(v);
+    }
+    box.appendChild(note);
+    paint(saved);
   });
 })();
 </script>
